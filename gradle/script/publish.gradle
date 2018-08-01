@@ -1,0 +1,203 @@
+apply plugin: "maven-publish"
+apply plugin: "com.github.dcendents.android-maven"
+apply plugin: "com.jfrog.bintray"
+
+//
+group = releaseGroupId
+version = releaseVersion
+
+// Artifactory-related //TODO <---
+/*artifactory {
+    contextUrl = "https://oss.jfrog.org/artifactory"
+    //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'oss-snapshot-local'
+            username = "${bintray_user}"
+            password = "${bintray_apikey}"
+            maven = true
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'libs-snapshot'
+            username = "${bintray_user}"
+            password = "${bintray_apikey}"
+            maven = true
+        }
+    }
+}
+
+artifactoryPublish.dependsOn('build', 'install')*/
+//TODO <---
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId = releaseGroupId
+            artifactId = releaseArtifact
+            version = releaseVersion
+            // Tell maven to prepare the generated "*.aar" file for publishing
+            artifact(androidSourcesJar)
+            artifact("$buildDir/outputs/aar/${project.archivesBaseName}-release.aar")
+        }
+    }
+}
+
+//TODO <---
+//TODO <---
+/*artifactoryPublish {
+    publications(publishing.publications.aar)
+}*/
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging "aar"
+            groupId releaseGroupId
+            artifactId releaseArtifact
+
+            name releaseArtifact
+            description releaseDescription
+            url releaseWebsite
+
+            licenses {
+                license {
+                    name licenseName
+                    url licenseUrl
+                }
+            }
+
+            developers {
+                developer {
+                    id developerId
+                    name developerName
+                    email developerEmail
+                }
+            }
+
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = "sources"
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.srcDirs
+    // Also add the generated R class to avoid errors...
+    // TODO: debug is hard-coded
+    source += "$buildDir/generated/source/r/debug/"
+    // ... but exclude the R classes from the docs
+    excludes += "**/R.java"
+
+    // TODO: "compile" is deprecated in Gradle 4.1,
+    // but "implementation" and "api" are not resolvable :(
+    classpath += configurations.compile
+
+    afterEvaluate {
+        // Wait after evaluation to add the android classpath
+        // to avoid "buildToolsVersion is not specified" error
+        classpath += files(android.getBootClasspath())
+
+        // Process AAR dependencies
+        def aarDependencies = classpath.filter { it.name.endsWith('.aar') }
+        classpath -= aarDependencies
+        aarDependencies.each { aar ->
+            System.out.println("Adding classpath for aar: " + aar.name)
+            // Extract classes.jar from the AAR dependency, and add it to the javadoc classpath
+            def outputPath = "$buildDir/tmp/exploded-aar/${aar.name.replace('.aar', '.jar')}"
+            classpath += files(outputPath)
+
+            // Use a task so the actual extraction only happens before the javadoc task is run
+            dependsOn task(name: "extract ${aar.name}").doLast {
+                extractEntry(aar, 'classes.jar', outputPath)
+            }
+        }
+    }
+}
+
+// Utility method to extract only one entry in a zip file
+private def extractEntry(archive, entryPath, outputPath) {
+    if (!archive.exists()) {
+        throw new GradleException("archive $archive not found")
+    }
+
+    def zip = new java.util.zip.ZipFile(archive)
+
+    zip.entries().each {
+        if (it.name == entryPath) {
+            def path = new File(outputPath)
+
+            if (!path.exists()) {
+                path.getParentFile().mkdirs()
+
+                // Surely there's a simpler is->os utility except
+                // the one in java.nio.Files? Ah well...
+                def buf = new byte[1024]
+                def is = zip.getInputStream(it)
+                def os = new FileOutputStream(path)
+                def len
+
+                while ((len = is.read(buf)) != -1) {
+                    os.write(buf, 0, len)
+                }
+                os.close()
+            }
+        }
+    }
+    zip.close()
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = "javadoc"
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+//TODO <---
+bintray {
+    user = bintrayUser
+    key = bintrayApiKey
+
+    configurations = ["archives"]
+
+    pkg {
+        repo = releaseRepoName
+        //userOrg = releaseUserOrg
+        name = releaseArtifact
+        desc = releaseDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        issueTrackerUrl = issueTracker
+        githubReleaseNotesFile = releaseNotesFile
+        licenses = allLicenses
+        dryRun = false
+        publish = true
+        override = false
+        publicDownloadNumbers = false
+
+        version {
+            desc = releaseDescription
+        }
+    }
+}
+
+bintrayUpload.dependsOn("install")

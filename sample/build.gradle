@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.compileSdk
+
+    defaultConfig {
+        applicationId "com.arthurivanets.adapster"
+        minSdkVersion 18
+        targetSdkVersion rootProject.targetSdk
+        versionCode rootProject.versionCode
+        versionName rootProject.version
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:${rootProject.supportLibraryVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.coordinatorLayoutVersion}"
+    implementation "androidx.recyclerview:recyclerview:${rootProject.supportLibraryVersion}"
+    implementation "androidx.cardview:cardview:${rootProject.supportLibraryVersion}"
+    testImplementation "junit:junit:${rootProject.jUnitVersion}"
+    testImplementation "org.robolectric:robolectric:${rootProject.robolectricVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.testRunnerVersion}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.espressoVersion}"
+    implementation project(path: ":adapster")
+}
