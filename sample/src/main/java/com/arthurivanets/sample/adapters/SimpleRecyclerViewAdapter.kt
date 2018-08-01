@@ -1,4 +1,4 @@
-package com.arthurivanets.adapster.adapters
+package com.arthurivanets.sample.adapters
 
 import android.content.Context
 import com.arthurivanets.adapster.listeners.OnItemClickListener

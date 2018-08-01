@@ -1,4 +1,4 @@
-package com.arthurivanets.adapster.model
+package com.arthurivanets.sample.model
 
 import androidx.annotation.ColorInt
 

@@ -163,6 +163,11 @@ private def extractEntry(archive, entryPath, outputPath) {
     zip.close()
 }
 
+String propertyOrDefault(String propertyName, String defaultValue = "") {
+    def propertyValue = project.properties[propertyName]
+    return ((propertyValue != null) ? propertyValue : defaultValue)
+}
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = "javadoc"
     from javadoc.destinationDir
@@ -174,8 +179,8 @@ artifacts {
 }
 
 bintray {
-    user = bintrayUser
-    key = bintrayApiKey
+    user = propertyOrDefault("bintrayUser")
+    key = propertyOrDefault("bintrayApiKey")
 
     configurations = ["archives"]
 

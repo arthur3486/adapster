@@ -1,15 +1,17 @@
-package com.arthurivanets.adapster
+package com.arthurivanets.sample
 
 import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
-import com.arthurivanets.adapster.adapters.FooterItem
-import com.arthurivanets.adapster.adapters.HeaderItem
-import com.arthurivanets.adapster.adapters.SimpleItem
-import com.arthurivanets.adapster.adapters.SimpleRecyclerViewAdapter
+import com.arthurivanets.sample.R
+import com.arthurivanets.sample.adapters.FooterItem
+import com.arthurivanets.sample.adapters.HeaderItem
+import com.arthurivanets.sample.adapters.SimpleItem
+import com.arthurivanets.sample.adapters.SimpleRecyclerViewAdapter
 import com.arthurivanets.adapster.listeners.OnDatasetChangeListener
 import com.arthurivanets.adapster.model.BaseItem
-import com.arthurivanets.adapster.model.Info
-import com.arthurivanets.adapster.model.SampleModel
+import com.arthurivanets.sample.RecyclerViewBasedDemoActivity
+import com.arthurivanets.sample.model.Info
+import com.arthurivanets.sample.model.SampleModel
 import junit.framework.TestCase.*
 import org.junit.Before
 import org.junit.Test

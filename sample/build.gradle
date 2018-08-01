@@ -8,7 +8,7 @@ android {
     compileSdkVersion rootProject.compileSdk
 
     defaultConfig {
-        applicationId "com.arthurivanets.adapster"
+        applicationId "com.arthurivanets.sample"
         minSdkVersion 18
         targetSdkVersion rootProject.targetSdk
         versionCode rootProject.versionCode

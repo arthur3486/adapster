@@ -1,4 +1,4 @@
-package com.arthurivanets.adapster.adapters
+package com.arthurivanets.sample.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arthurivanets.adapster.Adapter
-import com.arthurivanets.adapster.R
+import com.arthurivanets.sample.R
 import com.arthurivanets.adapster.listeners.OnItemClickListener
 import com.arthurivanets.adapster.markers.ItemResources
 import com.arthurivanets.adapster.model.BaseItem
-import com.arthurivanets.adapster.model.Info
 import com.arthurivanets.adapster.model.Item
 import com.arthurivanets.adapster.model.markers.Footer
+import com.arthurivanets.sample.model.Info
 
 class FooterItem(itemModel : Info) : BaseItem<Info, FooterItem.ViewHolder, ItemResources>(itemModel),
         Footer<BaseItem.ViewHolder<*>> {
