@@ -24,6 +24,8 @@ import com.arthurivanets.adapster.markers.ItemResources;
 
 import java.io.Serializable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -47,7 +49,10 @@ public interface Item<VH extends RecyclerView.ViewHolder, IR extends ItemResourc
      * @param resources reusable resources
      * @return the created Item View Holder
      */
-    VH init(Adapter adapter, ViewGroup parent, LayoutInflater inflater, IR resources);
+    VH init(@NonNull Adapter<? extends Item> adapter,
+            @NonNull ViewGroup parent,
+            @NonNull LayoutInflater inflater,
+            @Nullable IR resources);
 
 
     /**
@@ -57,7 +62,9 @@ public interface Item<VH extends RecyclerView.ViewHolder, IR extends ItemResourc
      * @param viewHolder item view holder
      * @param resources reusable resources
      */
-    void bind(Adapter adapter, VH viewHolder, IR resources);
+    void bind(@NonNull Adapter<? extends Item> adapter,
+              @NonNull VH viewHolder,
+              @Nullable IR resources);
 
 
     /**

@@ -22,6 +22,8 @@ import com.arthurivanets.adapster.Adapter;
 import com.arthurivanets.adapster.markers.ItemResources;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -53,7 +55,9 @@ public abstract class BaseItem<IM, VH extends BaseItem.ViewHolder<IM>, IR extend
 
     @CallSuper
     @Override
-    public void bind(Adapter adapter, VH viewHolder, IR resources) {
+    public void bind(@NonNull Adapter<? extends Item> adapter,
+                     @NonNull VH viewHolder,
+                     @Nullable IR resources) {
         viewHolder.bindData(getItemModel());
     }
 

@@ -17,7 +17,7 @@
 package com.arthurivanets.adapster;
 
 import com.arthurivanets.adapster.listeners.OnDatasetChangeListener;
-import com.arthurivanets.adapster.model.BaseItem;
+import com.arthurivanets.adapster.model.Item;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ import androidx.annotation.Nullable;
  * @param <IT> the dataset item type
  * @author arthur3486
  */
-public interface Adapter<IT extends BaseItem> {
+public interface Adapter<IT extends Item> {
 
     /**
      *  Adds the specified item to the end of the underlying dataset.

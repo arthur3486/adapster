@@ -3,10 +3,12 @@ package com.arthurivanets.adapster.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.arthurivanets.adapster.Adapter
 import com.arthurivanets.adapster.R
 import com.arthurivanets.adapster.markers.ItemResources
 import com.arthurivanets.adapster.model.BaseItem
+import com.arthurivanets.adapster.model.Item
 
 /**
  * Created by arthur3486
@@ -14,11 +16,11 @@ import com.arthurivanets.adapster.model.BaseItem
 class EmptyItem : BaseItem<Unit, EmptyItem.ViewHolder, ItemResources>(null) {
 
 
-    override fun init(adapter : Adapter<BaseItem<*, *, *>>?,
-                      parent : ViewGroup?,
-                      inflater : LayoutInflater?,
+    override fun init(adapter : Adapter<out Item<*, *>>,
+                      parent : ViewGroup,
+                      inflater : LayoutInflater,
                       resources : ItemResources?) : ViewHolder {
-        val inflatedView = inflater!!.inflate(MAIN_LAYOUT_ID, parent, false)
+        val inflatedView = inflater.inflate(MAIN_LAYOUT_ID, parent, false)
 
         val viewHolder = ViewHolder(inflatedView)
 
@@ -26,8 +28,8 @@ class EmptyItem : BaseItem<Unit, EmptyItem.ViewHolder, ItemResources>(null) {
     }
 
 
-    override fun bind(adapter : Adapter<BaseItem<*, *, *>>?,
-                      viewHolder : ViewHolder?,
+    override fun bind(adapter : Adapter<out Item<*, *>>,
+                      viewHolder : ViewHolder,
                       resources : ItemResources?) {
         super.bind(adapter, viewHolder, resources)
     }

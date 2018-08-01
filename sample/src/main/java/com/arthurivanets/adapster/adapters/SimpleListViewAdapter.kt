@@ -9,7 +9,7 @@ import com.arthurivanets.adapster.model.BaseItem
  * Created by arthur3486
  */
 class SimpleListViewAdapter(context : Context,
-                            items : ArrayList<BaseItem<*, *, *>>) : TrackableListViewAdapter<Long, BaseItem<*, *, *>, BaseItem.ViewHolder<*>>(context, items) {
+                            items : MutableList<BaseItem<*, *, *>>) : TrackableListViewAdapter<Long, BaseItem<*, *, *>, BaseItem.ViewHolder<*>>(context, items) {
 
 
     var mOnItemClickListener : OnItemClickListener<SimpleItem>? = null
@@ -24,8 +24,8 @@ class SimpleListViewAdapter(context : Context,
     }
 
 
-    override fun getItemViewType(position : Int, item : BaseItem<*, *, *>?) : Int {
-        return when(item!!.getLayout()) {
+    override fun getItemViewType(position : Int, item : BaseItem<*, *, *>) : Int {
+        return when(item.getLayout()) {
             SimpleItem.MAIN_LAYOUT_ID -> 0
             EmptyItem.MAIN_LAYOUT_ID -> 1
             HeaderItem.MAIN_LAYOUT_ID -> 2

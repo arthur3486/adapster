@@ -48,7 +48,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @param <VH> the item view holder type
  * @author arthur3486
  */
-public abstract class BaseRecyclerViewAdapter<IT extends BaseItem, VH extends BaseItem.ViewHolder> extends RecyclerView.Adapter<VH> implements Adapter<IT>,
+public abstract class BaseRecyclerViewAdapter<IT extends BaseItem, VH extends BaseItem.ViewHolder<?>> extends RecyclerView.Adapter<VH> implements Adapter<IT>,
         SupportsHeader<VH>, SupportsFooter<VH> {
 
 

@@ -48,7 +48,7 @@ import androidx.annotation.Nullable;
  * @param <VH> the item view holder type
  * @author arthur3486
  */
-public abstract class BaseListViewAdapter<IT extends BaseItem, VH extends BaseItem.ViewHolder> extends ArrayAdapter<IT> implements Adapter<IT>,
+public abstract class BaseListViewAdapter<IT extends BaseItem, VH extends BaseItem.ViewHolder<?>> extends ArrayAdapter<IT> implements Adapter<IT>,
         SupportsHeader<VH>, SupportsFooter<VH> {
 
 

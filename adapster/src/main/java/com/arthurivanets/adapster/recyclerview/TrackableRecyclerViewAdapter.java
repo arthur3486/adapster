@@ -43,7 +43,7 @@ import androidx.recyclerview.widget.DiffUtil;
  * @param <VH> the item view holder type
  * @author arthur3486
  */
-public abstract class TrackableRecyclerViewAdapter<KT, IT extends BaseItem, VH extends BaseItem.ViewHolder> extends BaseRecyclerViewAdapter<IT, VH> {
+public abstract class TrackableRecyclerViewAdapter<KT, IT extends BaseItem, VH extends BaseItem.ViewHolder<?>> extends BaseRecyclerViewAdapter<IT, VH> {
 
 
     private final Map<KT, Trackable<KT>> mKeyTrackableMap;

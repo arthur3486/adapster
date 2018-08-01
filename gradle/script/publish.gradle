@@ -95,6 +95,7 @@ task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
+//
 task javadoc(type: Javadoc) {
     failOnError false
     source = android.sourceSets.main.java.srcDirs
@@ -172,7 +173,6 @@ artifacts {
     archives sourcesJar
 }
 
-//TODO <---
 bintray {
     user = bintrayUser
     key = bintrayApiKey
