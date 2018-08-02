@@ -6,8 +6,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.minSdk
         targetSdkVersion rootProject.targetSdk
-        versionCode rootProject.versionCode
-        versionName rootProject.version
+        versionCode rootProject.releaseVersionCode
+        versionName rootProject.releaseVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -32,16 +32,12 @@ dependencies {
 
 }
 
-//TODO <---
-// Add library metadata
 ext {
-    //
     releaseArtifact = "adapster"
     releaseDescription = ""
 }
 
 project.archivesBaseName = "adapster"
 
-//
 apply from: "../common/constants.gradle"
 apply from: '../gradle/script/publish.gradle'

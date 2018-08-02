@@ -1,18 +1,10 @@
 
 
 project.ext {
-    //
-    projectName = "adapster"
-    group = "com.arthurivanets"
-    versionCode = 1
-    version = "1.0.0"
-
-    //
     compileSdk = 28
     targetSdk = 27
     minSdk = 14
 
-    //
     supportLibraryVersion = "1.0.0-beta01"
     robolectricVersion = "4.0-alpha-3-SNAPSHOT"
     jUnitVersion = "4.12"
@@ -20,12 +12,11 @@ project.ext {
     espressoVersion = "3.1.0-alpha4"
     coordinatorLayoutVersion = "2.0.0-alpha1"
 
-    //
     releaseRepoName = "adapster"
-    releaseUserOrg = "arthurlabs"//TODO <---
+    releaseUserOrg = "arthurlabs"
     releaseGroupId = "com.arthurivanets.adapster"
-    releaseVersion = "1.0.0" /* "1.0.0-SNAPSHOT" */
-    releaseVersionCode = 3
+    releaseVersion = "1.0.1"
+    releaseVersionCode = 4
     releaseWebsite = "https://github.com/arthur3486/adapster"
     releaseLicense = ["Apache-2.0"]
 

@@ -30,31 +30,14 @@
             android:layout_height="match_parent"
             android:background="#70000000"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/nameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/messageTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:textSize="32sp"/>
-
-            <TextView
-                android:id="@+id/buttonTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                style="@style/CardActionButton"
-                android:background="@drawable/card_action_button_background"/>
-
-        </LinearLayout>
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="52sp"/>
 
     </FrameLayout>
 

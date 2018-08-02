@@ -626,13 +626,9 @@ public abstract class BaseRecyclerViewAdapter<IT extends BaseItem, VH extends Ba
 
 
     /**
-     *
-     * <br>
-     *      Implements the default Item Count retrieval with the default NPE check.
-     * <br>
+     * Implements the default Item Count retrieval with the default NPE check.
      *
      * @return If <strong>dataset</strong> is NOT NULL -> dataset.size(), else 0
-     *
      */
     @Override
     public final int getItemCount() {
@@ -642,6 +638,11 @@ public abstract class BaseRecyclerViewAdapter<IT extends BaseItem, VH extends Ba
 
 
 
+    /**
+     * Retrieves the reusable {@link ItemResources} associated with the current adapter.
+     *
+     * @return the reusable {@link ItemResources} associated with the current adapter, or <strong>null</strong> if no resources have been associated.
+     */
     @Nullable
     public ItemResources getResources() {
         return null;

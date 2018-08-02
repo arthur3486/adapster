@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="recycler_view_margin_left">2dp</dimen>
+    <dimen name="recycler_view_margin_right">2dp</dimen>
+    <dimen name="recycler_view_padding_top">4dp</dimen>
+    <dimen name="recycler_view_padding_bottom">6dp</dimen>
+    <dimen name="card_view_padding_bottom">-4dp</dimen>
+    <dimen name="card_view_padding_left">2dp</dimen>
+    <dimen name="card_view_padding_right">2dp</dimen>
+    <dimen name="card_view_corner_radius">8dp</dimen>
+    <dimen name="card_view_elevation">2dp</dimen>
+    <dimen name="card_view_content_margin_bottom">-1dp</dimen>
+
+    <dimen name="topic_suggestion_item_width">160dp</dimen>
+    <dimen name="topic_suggestion_item_height">120dp</dimen>
+
+    <dimen name="article_image_size">60dp</dimen>
+    <dimen name="article_image_corner_radius">8dp</dimen>
+
+    <!-- Card Action Button related -->
+    <dimen name="card_action_button_margin_right">5dp</dimen>
+    <dimen name="card_action_button_padding_top">5dp</dimen>
+    <dimen name="card_action_button_padding_bottom">5dp</dimen>
+    <dimen name="card_action_button_padding_left">20dp</dimen>
+    <dimen name="card_action_button_padding_right">20dp</dimen>
+    <dimen name="card_action_button_text_size">18sp</dimen>
+    <dimen name="card_action_button_border_size">1.5dp</dimen>
+    <dimen name="card_action_button_background_internal_corner_radius">6.5dp</dimen>
+    <dimen name="card_action_button_background_external_corner_radius">8dp</dimen>
+
+</resources>

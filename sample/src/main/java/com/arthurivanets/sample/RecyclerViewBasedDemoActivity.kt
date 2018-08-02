@@ -2,17 +2,17 @@ package com.arthurivanets.sample
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arthurivanets.sample.R
-import com.arthurivanets.sample.adapters.*
 import com.arthurivanets.adapster.listeners.OnItemClickListener
+import com.arthurivanets.adapster.listeners.OnItemLongClickListener
 import com.arthurivanets.adapster.model.BaseItem
-import com.arthurivanets.sample.adapters.*
-import com.arthurivanets.sample.model.Info
-import com.arthurivanets.sample.model.SampleModel
+import com.arthurivanets.sample.adapters.SimpleRecyclerViewAdapter
+import com.arthurivanets.sample.adapters.model.*
+import com.arthurivanets.sample.model.Suggestions
+import com.arthurivanets.sample.util.DataProvider
 import kotlinx.android.synthetic.main.recycler_view_based_demo_activity_layout.*
 
 class RecyclerViewBasedDemoActivity : AppCompatActivity() {
@@ -35,48 +35,62 @@ class RecyclerViewBasedDemoActivity : AppCompatActivity() {
 
 
     private fun init() {
-        val adapter = SimpleRecyclerViewAdapter(this@RecyclerViewBasedDemoActivity, generateRandomItems(50, 7))
-        adapter.mOnItemClickListener = OnItemClickListener { view, item, position ->
-            val newItem = SimpleItem(
-                    SampleModel(
-                            (item.trackKey + 1),
-                            "A Title ${(item.trackKey + 1)}",
-                            "A Full Text ${(item.trackKey + 1)}"
-                    )
-            )
+        // dummy data
+        val datasetItems : MutableList<BaseItem<*, *, *>> = DataProvider.ATRICLES
+            .map { ArticleItem(it) }
+            .toMutableList()
 
-            adapter.addOrUpdateItem(adapter.indexOf(item), newItem)
+        val planetSuggestionItems = DataProvider.PLANETS_TOPICS.subList(1, DataProvider.PLANETS_TOPICS.size)
+            .map { TopicSuggestionItem(it) }
+            .toMutableList()
+
+        val generalSuggestionItems = DataProvider.GENERAL_TOPICS
+            .map { TopicSuggestionItem(it) }
+            .toMutableList()
+
+        // adapter initialization
+        val adapter = SimpleRecyclerViewAdapter(this@RecyclerViewBasedDemoActivity, datasetItems)
+        adapter.setOnHeaderClickListener { _, item, _ ->
+            toast("Header Item Clicked")
         }
-        adapter.addHeader(HeaderItem(Info(Color.parseColor("#025fee"), "Header Item")))
-        adapter.addFooter(FooterItem(Info(Color.parseColor("#ad02ee"), "Footer Item")))
+        adapter.setOnFooterClickListener { _, item, _ ->
+            toast("Footer Item Clicked")
+        }
+        adapter.onArticleItemClickListener = OnItemClickListener { _, item, _ ->
+            toast("Article Item Clicked: ${item.itemModel.title}")
+        }
+        adapter.onTopicSuggestionItemClickListener = OnItemClickListener { _, item, _ ->
+            toast("Topic Suggestion Item Clicked: ${item.itemModel.name}")
+        }
+        adapter.onTopicSuggestionItemLongClickListener = OnItemLongClickListener { _, item, _ ->
+            toast("Topic Suggestion Item Long Clicked: ${item.itemModel.name}")
+            true
+        }
+        adapter.onFooterButtonClickListener = OnItemClickListener { _, item, _ ->
+            toast("Footer Item Button Clicked: ${item.itemModel.buttonTitle}")
+        }
+        adapter.addHeader(TopicItem(DataProvider.PLANETS_TOPICS[0]))
+        adapter.addFooter(FooterItem(DataProvider.FOOTER_INFO))
 
+        // carousels
+        adapter.addOrUpdateItem(
+            5,
+            TopicSuggestionsItem(Suggestions(
+                id = 3252532,
+                suggestedItems = planetSuggestionItems
+            ))
+        )
+        adapter.addOrUpdateItem(
+            10,
+            TopicSuggestionsItem(Suggestions(
+                id = 3252533,
+                suggestedItems = generalSuggestionItems
+            ))
+        )
+
+        // the rest of the recycler view initialization
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-    }
-
-
-    private fun generateRandomItems(amount : Int, step : Int) : ArrayList<BaseItem<*, *, *>> {
-        val items = ArrayList<BaseItem<*, *, *>>()
-        var counter = 0
-
-        for(i in 0 until (amount * step) step step) {
-            items.add(SimpleItem(
-                    SampleModel(
-                            i.toLong(),
-                            "The Solar System is the gravitationally bound system[$i]...",
-                            "The Solar System[a$i] is the gravitationally bound system comprising the Sun and the objects that orbit it, either directly or indirectly.[b] Of the objects that orbit the Sun directly, the largest eight are the planets,[c] with the remainder being smaller objects, such as dwarf planets and small Solar System bodies. Of the objects that orbit the Sun indirectly, the moons, two are larger than the smallest planet, Mercury.[d]"
-                    )
-            ))
-
-            if(counter >= step) {
-                items.add(EmptyItem())
-                counter = 0
-            }
-
-            counter++
-        }
-
-        return items
     }
 
 

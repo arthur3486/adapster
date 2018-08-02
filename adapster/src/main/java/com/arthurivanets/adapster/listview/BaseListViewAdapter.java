@@ -560,6 +560,11 @@ public abstract class BaseListViewAdapter<IT extends BaseItem, VH extends BaseIt
 
 
 
+    /**
+     * Retrieves the reusable {@link ItemResources} associated with the current adapter.
+     *
+     * @return the reusable {@link ItemResources} associated with the current adapter, or <strong>null</strong> if no resources have been associated.
+     */
     @Nullable
     public ItemResources getResources() {
         return null;

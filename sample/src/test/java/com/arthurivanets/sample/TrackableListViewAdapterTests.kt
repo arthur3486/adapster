@@ -2,16 +2,10 @@ package com.arthurivanets.sample
 
 import android.graphics.Color
 import android.widget.ListView
-import com.arthurivanets.sample.R
-import com.arthurivanets.sample.adapters.FooterItem
-import com.arthurivanets.sample.adapters.HeaderItem
-import com.arthurivanets.sample.adapters.SimpleItem
+import com.arthurivanets.sample.adapters.model.ArticleItem
 import com.arthurivanets.sample.adapters.SimpleListViewAdapter
 import com.arthurivanets.adapster.listeners.OnDatasetChangeListener
 import com.arthurivanets.adapster.model.BaseItem
-import com.arthurivanets.sample.ListViewBasedDemoActivity
-import com.arthurivanets.sample.model.Info
-import com.arthurivanets.sample.model.SampleModel
 import junit.framework.TestCase.*
 import org.junit.Before
 import org.junit.Test
@@ -53,8 +47,8 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1a = SimpleItem(SampleModel(1, "Item 1a"))
-        val item1b = SimpleItem(SampleModel(1, "Item 1b"))
+        val item1a = ArticleItem(SampleModel(1, "Item 1a"))
+        val item1b = ArticleItem(SampleModel(1, "Item 1b"))
         val previousItemCount = adapter.itemCount
 
         // adding the first item into the dataset and verifying the
@@ -62,14 +56,14 @@ class TrackableListViewAdapterTests {
 
         val newItemCount = adapter.itemCount
 
-        assertEquals((adapter.getItem(adapter.indexOf(item1a)) as SimpleItem?)!!.itemModel.title, item1a.itemModel.title)
+        assertEquals((adapter.getItem(adapter.indexOf(item1a)) as ArticleItem?)!!.itemModel.title, item1a.itemModel.title)
         assertNotSame(previousItemCount, newItemCount)
         assertTrue(adapter.contains(item1a))
 
         //
         adapter.addItem(item1b)
 
-        assertNotSame((adapter.getItem(adapter.indexOf(item1a)) as SimpleItem?)!!.itemModel.title, item1b.itemModel.title)
+        assertNotSame((adapter.getItem(adapter.indexOf(item1a)) as ArticleItem?)!!.itemModel.title, item1b.itemModel.title)
 
         assertNotSame(previousItemCount, newItemCount)
         assertEquals(adapter.itemCount, newItemCount)
@@ -81,9 +75,9 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
-        val item2 = SimpleItem(SampleModel(2, "Item 2"))
-        val item3 = SimpleItem(SampleModel(3, "Item 3"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item2 = ArticleItem(SampleModel(2, "Item 2"))
+        val item3 = ArticleItem(SampleModel(3, "Item 3"))
 
         //
         adapter.addItem(0, item1)
@@ -105,14 +99,14 @@ class TrackableListViewAdapterTests {
     @Test(expected = IndexOutOfBoundsException::class)
     fun testItemAdditionAtTooLowIndex() {
         adapter.clear()
-        adapter.addItem(-1, SimpleItem(SampleModel(1, "Item 1")))
+        adapter.addItem(-1, ArticleItem(SampleModel(1, "Item 1")))
     }
 
 
     @Test(expected = IndexOutOfBoundsException::class)
     fun testItemAdditionAtTooHighIndex() {
         adapter.clear()
-        adapter.addItem(1, SimpleItem(SampleModel(1, "Item 1")))
+        adapter.addItem(1, ArticleItem(SampleModel(1, "Item 1")))
     }
 
 
@@ -121,7 +115,7 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
         val previousItemCount = adapter.itemCount
 
         adapter.addItem(item1)
@@ -147,8 +141,8 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1a = SimpleItem(SampleModel(1, "Item 1a"))
-        val item1b = SimpleItem(SampleModel(1, "Item 1b"))
+        val item1a = ArticleItem(SampleModel(1, "Item 1a"))
+        val item1b = ArticleItem(SampleModel(1, "Item 1b"))
         val previousItemCount = adapter.itemCount
 
         //
@@ -156,14 +150,14 @@ class TrackableListViewAdapterTests {
 
         val newItemCount = adapter.itemCount
 
-        assertEquals((adapter.getItem(adapter.indexOf(item1a)) as SimpleItem?)!!.itemModel.title, item1a.itemModel.title)
+        assertEquals((adapter.getItem(adapter.indexOf(item1a)) as ArticleItem?)!!.itemModel.title, item1a.itemModel.title)
         assertNotSame(previousItemCount, newItemCount)
         assertTrue(adapter.contains(item1a))
 
         //
         adapter.addOrUpdateItem(item1b)
 
-        assertEquals((adapter.getItem(adapter.indexOf(item1a)) as SimpleItem?)!!.itemModel.title, item1b.itemModel.title)
+        assertEquals((adapter.getItem(adapter.indexOf(item1a)) as ArticleItem?)!!.itemModel.title, item1b.itemModel.title)
         assertNotSame(previousItemCount, newItemCount)
         assertEquals(adapter.itemCount, newItemCount)
     }
@@ -174,10 +168,10 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
-        val item2 = SimpleItem(SampleModel(2, "Item 2"))
-        val item3 = SimpleItem(SampleModel(3, "Item 3"))
-        val item3b = SimpleItem(SampleModel(3, "Item 3b"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item2 = ArticleItem(SampleModel(2, "Item 2"))
+        val item3 = ArticleItem(SampleModel(3, "Item 3"))
+        val item3b = ArticleItem(SampleModel(3, "Item 3b"))
 
         //
         adapter.addOrUpdateItem(0, item1)
@@ -197,21 +191,21 @@ class TrackableListViewAdapterTests {
         //
         adapter.addOrUpdateItem(0, item3b)
 
-        assertEquals((adapter.firstItem as SimpleItem?)!!.itemModel.title, item3b.itemModel.title)
+        assertEquals((adapter.firstItem as ArticleItem?)!!.itemModel.title, item3b.itemModel.title)
     }
 
 
     @Test(expected = IndexOutOfBoundsException::class)
     fun testItemAdditionWithUpdatingAtTooLowIndex() {
         adapter.clear()
-        adapter.addOrUpdateItem(-1, SimpleItem(SampleModel(1, "Item 1")))
+        adapter.addOrUpdateItem(-1, ArticleItem(SampleModel(1, "Item 1")))
     }
 
 
     @Test(expected = IndexOutOfBoundsException::class)
     fun testItemAdditionWithUpdatingAtTooHighIndex() {
         adapter.clear()
-        adapter.addOrUpdateItem(1, SimpleItem(SampleModel(1, "Item 1")))
+        adapter.addOrUpdateItem(1, ArticleItem(SampleModel(1, "Item 1")))
     }
 
 
@@ -220,7 +214,7 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
         val headerItem1 = HeaderItem(Info(Color.RED, "Header Item 1"))
         val headerItem2 = HeaderItem(Info(Color.RED, "Header Item 2"))
 
@@ -240,7 +234,7 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
         val headerItem = HeaderItem(Info(Color.RED, "Header Item"))
 
         //
@@ -263,7 +257,7 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
         val footerItem1 = FooterItem(Info(Color.GREEN, "Footer Item 1"))
         val footerItem2 = FooterItem(Info(Color.GREEN, "Footer Item 2"))
 
@@ -283,7 +277,7 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
         val footerItem = FooterItem(Info(Color.RED, "Footer Item"))
 
         //
@@ -306,18 +300,18 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
-        val item1b = SimpleItem(SampleModel(1, "Item 1b"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item1b = ArticleItem(SampleModel(1, "Item 1b"))
 
         //
         adapter.addItem(item1)
 
-        assertEquals((adapter.firstItem as SimpleItem?)!!.itemModel.title, item1.itemModel.title)
+        assertEquals((adapter.firstItem as ArticleItem?)!!.itemModel.title, item1.itemModel.title)
 
         //
         adapter.updateItemWith(item1b)
 
-        assertEquals((adapter.firstItem as SimpleItem?)!!.itemModel.title, item1b.itemModel.title)
+        assertEquals((adapter.firstItem as ArticleItem?)!!.itemModel.title, item1b.itemModel.title)
     }
 
 
@@ -326,29 +320,29 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
-        val item1b = SimpleItem(SampleModel(1, "Item 1b"))
-        val item2 = SimpleItem(SampleModel(2, "Item 2"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item1b = ArticleItem(SampleModel(1, "Item 1b"))
+        val item2 = ArticleItem(SampleModel(2, "Item 2"))
 
         //
         adapter.addItem(item1)
         adapter.addItem(item2)
 
-        assertEquals((adapter.firstItem as SimpleItem?)!!.itemModel.title, item1.itemModel.title)
+        assertEquals((adapter.firstItem as ArticleItem?)!!.itemModel.title, item1.itemModel.title)
 
         //
         adapter.updateItemWith(item1b)
 
-        assertEquals((adapter.firstItem as SimpleItem?)!!.itemModel.title, item1b.itemModel.title)
+        assertEquals((adapter.firstItem as ArticleItem?)!!.itemModel.title, item1b.itemModel.title)
     }
 
 
     @Test
     fun testItemRemovalByItem() {
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
-        val item2 = SimpleItem(SampleModel(2, "Item 2"))
-        val item3 = SimpleItem(SampleModel(3, "Item 3"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item2 = ArticleItem(SampleModel(2, "Item 2"))
+        val item3 = ArticleItem(SampleModel(3, "Item 3"))
         val items = mutableListOf< BaseItem <*, *, *>>(item1, item2, item3)
 
         //
@@ -379,9 +373,9 @@ class TrackableListViewAdapterTests {
     @Test
     fun testItemRemovalByIndex() {
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
-        val item2 = SimpleItem(SampleModel(2, "Item 2"))
-        val item3 = SimpleItem(SampleModel(3, "Item 3"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item2 = ArticleItem(SampleModel(2, "Item 2"))
+        val item3 = ArticleItem(SampleModel(3, "Item 3"))
         val items = mutableListOf< BaseItem <*, *, *>>(item1, item2, item3)
 
         //
@@ -414,7 +408,7 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
 
         assertEquals(adapter.getItem(0), null)
 
@@ -430,7 +424,7 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data and attempting to retrieve the dataset index for it
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
 
         assertEquals(adapter.indexOf(item1), -1)
 
@@ -446,7 +440,7 @@ class TrackableListViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data and verifying if it's present within the dataset
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
 
         assertFalse(adapter.contains(item1))
 
@@ -460,9 +454,9 @@ class TrackableListViewAdapterTests {
     @Test
     fun testDataSetSetting() {
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
-        val item2 = SimpleItem(SampleModel(2, "Item 2"))
-        val item3 = SimpleItem(SampleModel(3, "Item 3"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item2 = ArticleItem(SampleModel(2, "Item 2"))
+        val item3 = ArticleItem(SampleModel(3, "Item 3"))
         val items = mutableListOf< BaseItem <*, *, *>>(item1, item2, item3)
 
         // setting the new dummy dataset
@@ -481,7 +475,7 @@ class TrackableListViewAdapterTests {
     @Test
     fun testDataSetClearing() {
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
 
         // adding the dummy item into the dataset and verifying if it was indeed added
         adapter.addItem(item1)
@@ -498,11 +492,11 @@ class TrackableListViewAdapterTests {
     @Test
     fun testDatasetChangeListener() {
         // preparing the dummy data
-        val item1 = SimpleItem(SampleModel(1, "Item 1"))
-        val item2 = SimpleItem(SampleModel(2, "Item 2"))
-        val item3 = SimpleItem(SampleModel(3, "Item 3"))
-        val item4 = SimpleItem(SampleModel(4, "Item 4"))
-        val item4b = SimpleItem(SampleModel(4, "Item 4b"))
+        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item2 = ArticleItem(SampleModel(2, "Item 2"))
+        val item3 = ArticleItem(SampleModel(3, "Item 3"))
+        val item4 = ArticleItem(SampleModel(4, "Item 4"))
+        val item4b = ArticleItem(SampleModel(4, "Item 4b"))
         val items = mutableListOf< BaseItem <*, *, *>>(item1, item2, item3)
 
         // assigning a Dataset Change Listener and performing all the observable operations sequentially

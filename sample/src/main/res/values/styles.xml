@@ -1,11 +1,29 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="SingleLineTextView">
+        <item name="android:maxLines">1</item>
+        <item name="android:minLines">1</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="CardActionButton" parent="SingleLineTextView">
+        <item name="android:paddingTop">@dimen/card_action_button_padding_top</item>
+        <item name="android:paddingBottom">@dimen/card_action_button_padding_bottom</item>
+        <item name="android:paddingLeft">@dimen/card_action_button_padding_left</item>
+        <item name="android:paddingRight">@dimen/card_action_button_padding_right</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/card_action_button_text_size</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>
