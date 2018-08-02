@@ -2,10 +2,13 @@ package com.arthurivanets.sample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.arthurivanets.sample.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    
+    val TAG = "MainActivity"
+
+    val TAG = "MainActivity"
 
 
     override fun onCreate(savedInstanceState : Bundle?) {

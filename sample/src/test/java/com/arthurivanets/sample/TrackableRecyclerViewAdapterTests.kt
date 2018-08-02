@@ -1,11 +1,15 @@
 package com.arthurivanets.sample
 
-import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
-import com.arthurivanets.sample.adapters.model.ArticleItem
-import com.arthurivanets.sample.adapters.SimpleRecyclerViewAdapter
 import com.arthurivanets.adapster.listeners.OnDatasetChangeListener
 import com.arthurivanets.adapster.model.BaseItem
+import com.arthurivanets.sample.adapters.SimpleRecyclerViewAdapter
+import com.arthurivanets.sample.adapters.model.ArticleItem
+import com.arthurivanets.sample.adapters.model.FooterItem
+import com.arthurivanets.sample.adapters.model.TopicItem
+import com.arthurivanets.sample.model.Article
+import com.arthurivanets.sample.model.FooterInfo
+import com.arthurivanets.sample.util.DataProvider
 import junit.framework.TestCase.*
 import org.junit.Before
 import org.junit.Test
@@ -47,8 +51,8 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1a = ArticleItem(SampleModel(1, "Item 1a"))
-        val item1b = ArticleItem(SampleModel(1, "Item 1b"))
+        val item1a = ArticleItem(Article(1, "Item 1a", ""))
+        val item1b = ArticleItem(Article(1, "Item 1b", ""))
         val previousItemCount = adapter.itemCount
 
         // adding the first item into the dataset and verifying the
@@ -75,9 +79,9 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val item2 = ArticleItem(SampleModel(2, "Item 2"))
-        val item3 = ArticleItem(SampleModel(3, "Item 3"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val item2 = ArticleItem(Article(2, "Item 2", ""))
+        val item3 = ArticleItem(Article(3, "Item 3", ""))
 
         //
         adapter.addItem(0, item1)
@@ -99,14 +103,14 @@ class TrackableRecyclerViewAdapterTests {
     @Test(expected = IndexOutOfBoundsException::class)
     fun testItemAdditionAtTooLowIndex() {
         adapter.clear()
-        adapter.addItem(-1, ArticleItem(SampleModel(1, "Item 1")))
+        adapter.addItem(-1, ArticleItem(Article(1, "Item 1", "")))
     }
 
 
     @Test(expected = IndexOutOfBoundsException::class)
     fun testItemAdditionAtTooHighIndex() {
         adapter.clear()
-        adapter.addItem(1, ArticleItem(SampleModel(1, "Item 1")))
+        adapter.addItem(1, ArticleItem(Article(1, "Item 1", "")))
     }
 
 
@@ -115,7 +119,7 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
         val previousItemCount = adapter.itemCount
 
         adapter.addItem(item1)
@@ -141,8 +145,8 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1a = ArticleItem(SampleModel(1, "Item 1a"))
-        val item1b = ArticleItem(SampleModel(1, "Item 1b"))
+        val item1a = ArticleItem(Article(1, "Item 1a", ""))
+        val item1b = ArticleItem(Article(1, "Item 1b", ""))
         val previousItemCount = adapter.itemCount
 
         //
@@ -168,10 +172,10 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val item2 = ArticleItem(SampleModel(2, "Item 2"))
-        val item3 = ArticleItem(SampleModel(3, "Item 3"))
-        val item3b = ArticleItem(SampleModel(3, "Item 3b"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val item2 = ArticleItem(Article(2, "Item 2", ""))
+        val item3 = ArticleItem(Article(3, "Item 3", ""))
+        val item3b = ArticleItem(Article(3, "Item 3b", ""))
 
         //
         adapter.addOrUpdateItem(0, item1)
@@ -198,14 +202,14 @@ class TrackableRecyclerViewAdapterTests {
     @Test(expected = IndexOutOfBoundsException::class)
     fun testItemAdditionWithUpdatingAtTooLowIndex() {
         adapter.clear()
-        adapter.addOrUpdateItem(-1, ArticleItem(SampleModel(1, "Item 1")))
+        adapter.addOrUpdateItem(-1, ArticleItem(Article(1, "Item 1", "")))
     }
 
 
     @Test(expected = IndexOutOfBoundsException::class)
     fun testItemAdditionWithUpdatingAtTooHighIndex() {
         adapter.clear()
-        adapter.addOrUpdateItem(1, ArticleItem(SampleModel(1, "Item 1")))
+        adapter.addOrUpdateItem(1, ArticleItem(Article(1, "Item 1", "")))
     }
 
 
@@ -214,9 +218,9 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val headerItem1 = HeaderItem(Info(Color.RED, "Header Item 1"))
-        val headerItem2 = HeaderItem(Info(Color.RED, "Header Item 2"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val headerItem1 = TopicItem(DataProvider.GENERAL_TOPICS[0])
+        val headerItem2 = TopicItem(DataProvider.GENERAL_TOPICS[1])
 
         //
         adapter.addItem(item1)
@@ -234,8 +238,8 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val headerItem = HeaderItem(Info(Color.RED, "Header Item"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val headerItem = TopicItem(DataProvider.GENERAL_TOPICS[0])
 
         //
         adapter.addItem(item1)
@@ -257,9 +261,9 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val footerItem1 = FooterItem(Info(Color.GREEN, "Footer Item 1"))
-        val footerItem2 = FooterItem(Info(Color.GREEN, "Footer Item 2"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val footerItem1 = FooterItem(FooterInfo(2, "Footer Item 1", ""))
+        val footerItem2 = FooterItem(FooterInfo(3, "Footer Item 2", ""))
 
         //
         adapter.addItem(item1)
@@ -277,8 +281,8 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val footerItem = FooterItem(Info(Color.RED, "Footer Item"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val footerItem = FooterItem(FooterInfo(2, "Footer Item", ""))
 
         //
         adapter.addItem(item1)
@@ -300,8 +304,8 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val item1b = ArticleItem(SampleModel(1, "Item 1b"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val item1b = ArticleItem(Article(1, "Item 1b", ""))
 
         //
         adapter.addItem(item1)
@@ -320,9 +324,9 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val item1b = ArticleItem(SampleModel(1, "Item 1b"))
-        val item2 = ArticleItem(SampleModel(2, "Item 2"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val item1b = ArticleItem(Article(1, "Item 1b", ""))
+        val item2 = ArticleItem(Article(2, "Item 2", ""))
 
         //
         adapter.addItem(item1)
@@ -340,9 +344,9 @@ class TrackableRecyclerViewAdapterTests {
     @Test
     fun testItemRemovalByItem() {
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val item2 = ArticleItem(SampleModel(2, "Item 2"))
-        val item3 = ArticleItem(SampleModel(3, "Item 3"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val item2 = ArticleItem(Article(2, "Item 2", ""))
+        val item3 = ArticleItem(Article(3, "Item 3", ""))
         val items = mutableListOf< BaseItem <*, *, *>>(item1, item2, item3)
 
         //
@@ -373,9 +377,9 @@ class TrackableRecyclerViewAdapterTests {
     @Test
     fun testItemRemovalByIndex() {
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val item2 = ArticleItem(SampleModel(2, "Item 2"))
-        val item3 = ArticleItem(SampleModel(3, "Item 3"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val item2 = ArticleItem(Article(2, "Item 2", ""))
+        val item3 = ArticleItem(Article(3, "Item 3", ""))
         val items = mutableListOf< BaseItem <*, *, *>>(item1, item2, item3)
 
         //
@@ -408,7 +412,7 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
 
         assertEquals(adapter.getItem(0), null)
 
@@ -424,7 +428,7 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data and attempting to retrieve the dataset index for it
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
 
         assertEquals(adapter.indexOf(item1), -1)
 
@@ -440,7 +444,7 @@ class TrackableRecyclerViewAdapterTests {
         adapter.clear()
 
         // preparing the dummy data and verifying if it's present within the dataset
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
 
         assertFalse(adapter.contains(item1))
 
@@ -454,9 +458,9 @@ class TrackableRecyclerViewAdapterTests {
     @Test
     fun testDataSetSetting() {
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val item2 = ArticleItem(SampleModel(2, "Item 2"))
-        val item3 = ArticleItem(SampleModel(3, "Item 3"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val item2 = ArticleItem(Article(2, "Item 2", ""))
+        val item3 = ArticleItem(Article(3, "Item 3", ""))
         val items = mutableListOf< BaseItem <*, *, *>>(item1, item2, item3)
 
         // setting the new dummy dataset
@@ -475,7 +479,7 @@ class TrackableRecyclerViewAdapterTests {
     @Test
     fun testDataSetClearing() {
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
 
         // adding the dummy item into the dataset and verifying if it was indeed added
         adapter.addItem(item1)
@@ -492,11 +496,11 @@ class TrackableRecyclerViewAdapterTests {
     @Test
     fun testDatasetChangeListener() {
         // preparing the dummy data
-        val item1 = ArticleItem(SampleModel(1, "Item 1"))
-        val item2 = ArticleItem(SampleModel(2, "Item 2"))
-        val item3 = ArticleItem(SampleModel(3, "Item 3"))
-        val item4 = ArticleItem(SampleModel(4, "Item 4"))
-        val item4b = ArticleItem(SampleModel(4, "Item 4b"))
+        val item1 = ArticleItem(Article(1, "Item 1", ""))
+        val item2 = ArticleItem(Article(2, "Item 2", ""))
+        val item3 = ArticleItem(Article(3, "Item 3", ""))
+        val item4 = ArticleItem(Article(4, "Item 4", ""))
+        val item4b = ArticleItem(Article(4, "Item 4b", ""))
         val items = mutableListOf< BaseItem <*, *, *>>(item1, item2, item3)
 
         // assigning a Dataset Change Listener and performing all the observable operations sequentially
