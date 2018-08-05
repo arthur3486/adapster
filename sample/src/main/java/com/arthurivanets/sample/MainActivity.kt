@@ -17,11 +17,11 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun init() {
-        listViewBasedDemoButton.setOnClickListener {
+        listViewBasedDemoButtonTv.setOnClickListener {
             startActivity(ListViewBasedDemoActivity.init(this@MainActivity))
         }
 
-        recyclerViewBasedDemoButton.setOnClickListener {
+        recyclerViewBasedDemoButtonTv.setOnClickListener {
             startActivity(RecyclerViewBasedDemoActivity.init(this@MainActivity))
         }
     }

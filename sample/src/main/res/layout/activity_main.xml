@@ -5,35 +5,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.arthurivanets.adapster.com.arthurivanets.sample.MainActivity">
+    android:background="@color/colorPrimaryDark">
 
-    <Button
-        android:id="@+id/listViewBasedDemoButton"
+    <TextView
+        android:id="@+id/listViewBasedDemoButtonTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginEnd="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewBasedDemoButton"
+        style="@style/CardActionButton"
+        android:background="@drawable/card_action_button_background"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewBasedDemoButtonTv"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         android:text="ListView-based Demo"/>
 
-    <Button
-        android:id="@+id/recyclerViewBasedDemoButton"
+    <TextView
+        android:id="@+id/recyclerViewBasedDemoButtonTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginEnd="50dp"
+        style="@style/CardActionButton"
+        android:background="@drawable/card_action_button_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewBasedDemoButton"
+        app:layout_constraintTop_toBottomOf="@+id/listViewBasedDemoButtonTv"
         android:text="RecyclerView-based Demo"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
