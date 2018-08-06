@@ -54,7 +54,16 @@ dependencies {
 }
 ````
 
-3. Proceed with the implementation of your own adapter. 
+3. Enable the **jetifier** and **androidX** support in the top-level `gradle.properties`
+
+````groovy
+//...
+android.enableJetifier=true
+android.useAndroidX=true
+//....
+````
+
+4. Proceed with the implementation of your own adapter. 
 > ***See: [Basic RecyclerView-based Implementation](#basic-recyclerview-based-implementation) and [Basic ListView-based Implementation](#basic-listview-based-implementation)***
 
 ## Basic RecyclerView-based Implementation
