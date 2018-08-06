@@ -63,7 +63,31 @@ android.useAndroidX=true
 //....
 ````
 
-4. Proceed with the implementation of your own adapter. 
+4. Update your `compileSdkVersion` in the module-level `build.gradle` file to **28+**.
+
+````groovy
+//...
+android {
+    //...
+    compileSdkVersion 28
+    //...
+}
+//...
+````
+
+5. Update your `com.android.support.appcompat.*` dependency to the new `androidx.appcompat.*` alternative.
+
+````groovy
+//...
+dependencies {
+    //...
+    implementation "androidx.appcompat:appcompat:1.0.0-beta01"
+    //...
+}
+//...
+````
+
+6. Proceed with the implementation of your own adapter. 
 > ***See: [Basic RecyclerView-based Implementation](#basic-recyclerview-based-implementation) and [Basic ListView-based Implementation](#basic-listview-based-implementation)***
 
 ## Basic RecyclerView-based Implementation
