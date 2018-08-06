@@ -54,7 +54,7 @@ dependencies {
 }
 ````
 
-3. Enable the **jetifier** and **androidX** support in the top-level `gradle.properties`
+3. Enable the **jetifier** and **androidX** support in the top-level `gradle.properties` file.
 
 ````groovy
 //...
