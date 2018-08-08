@@ -687,7 +687,6 @@ See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
             </td>
             <td valign="middle;"><b>Reminder</b></td>
         </tr>
-        <br>
         <tr>
             <td valign="middle;">
                 <a href="https://play.google.com/store/apps/details?id=com.arthurivanets.owly">
@@ -695,8 +694,7 @@ See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
                 </a>
             </td>
             <td valign="middle;"><b>Owly</b></td>
-        </tr>
-        <br>
+    	</tr>
         <tr>
             <td valign="middle;">
                 <a href="https://play.google.com/store/apps/details?id=com.stocksexchange.android">
