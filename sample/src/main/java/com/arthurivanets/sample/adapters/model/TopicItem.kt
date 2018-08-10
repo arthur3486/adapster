@@ -21,7 +21,7 @@ class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemR
         Header<BaseItem.ViewHolder<*>> {
 
 
-    override fun init(adapter : Adapter<out Item<out RecyclerView.ViewHolder, out ItemResources>>,
+    override fun init(adapter : Adapter<out Item<out RecyclerView.ViewHolder, out ItemResources>>?,
                       parent : ViewGroup,
                       inflater : LayoutInflater,
                       resources : ItemResources?) : ViewHolder {
@@ -33,7 +33,7 @@ class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemR
     }
 
 
-    override fun bind(adapter : Adapter<out Item<out RecyclerView.ViewHolder, out ItemResources>>,
+    override fun bind(adapter : Adapter<out Item<out RecyclerView.ViewHolder, out ItemResources>>?,
                       viewHolder : ViewHolder,
                       resources : ItemResources?) {
         super.bind(adapter, viewHolder, resources)

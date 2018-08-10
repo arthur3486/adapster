@@ -55,7 +55,7 @@ public abstract class BaseItem<IM, VH extends BaseItem.ViewHolder<IM>, IR extend
 
     @CallSuper
     @Override
-    public void bind(@NonNull Adapter<? extends Item> adapter,
+    public void bind(@Nullable Adapter<? extends Item> adapter,
                      @NonNull VH viewHolder,
                      @Nullable IR resources) {
         viewHolder.bindData(getItemModel());
