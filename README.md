@@ -54,7 +54,40 @@ dependencies {
 }
 ````
 
-3. Proceed with the implementation of your own adapter. 
+3. Enable the **jetifier** and **androidX** support in the top-level `gradle.properties` file.
+
+````groovy
+//...
+android.enableJetifier=true
+android.useAndroidX=true
+//....
+````
+
+4. Update your `compileSdkVersion` in the module-level `build.gradle` file to **28+**.
+
+````groovy
+//...
+android {
+    //...
+    compileSdkVersion 28
+    //...
+}
+//...
+````
+
+5. Update your `com.android.support.appcompat.*` dependency to the new `androidx.appcompat.*` alternative.
+
+````groovy
+//...
+dependencies {
+    //...
+    implementation "androidx.appcompat:appcompat:1.0.0-beta01"
+    //...
+}
+//...
+````
+
+6. Proceed with the implementation of your own adapter. 
 > ***See: [Basic RecyclerView-based Implementation](#basic-recyclerview-based-implementation) and [Basic ListView-based Implementation](#basic-listview-based-implementation)***
 
 ## Basic RecyclerView-based Implementation
@@ -654,7 +687,6 @@ See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
             </td>
             <td valign="middle;"><b>Reminder</b></td>
         </tr>
-        <br>
         <tr>
             <td valign="middle;">
                 <a href="https://play.google.com/store/apps/details?id=com.arthurivanets.owly">
@@ -662,8 +694,7 @@ See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
                 </a>
             </td>
             <td valign="middle;"><b>Owly</b></td>
-        </tr>
-        <br>
+    	</tr>
         <tr>
             <td valign="middle;">
                 <a href="https://play.google.com/store/apps/details?id=com.stocksexchange.android">
