@@ -362,36 +362,32 @@ public abstract class TrackableRecyclerViewAdapter<KT, IT extends BaseItem, VH e
 
 
     @Override
-    public void setItems(@NonNull List<IT> items) {
-        Preconditions.nonNull(items);
-
-        mKeyTrackableMap.clear();
-        trackIfNecessary(items);
-
-        // updating the internal dataset
-        super.setItems(items);
-    }
-
-
-
-
-    @Override
-    public void setItems(@NonNull final List<IT> items, @NonNull DiffUtil.Callback callback) {
+    public final void setItems(@NonNull final List<IT> items, @NonNull DiffUtil.Callback callback) {
         Preconditions.nonNull(items);
         Preconditions.nonNull(callback);
-
-        mKeyTrackableMap.clear();
-        trackIfNecessary(items);
 
         applyDiffUtils(
             callback,
             new Runnable() {
                 @Override
                 public void run() {
-                    TrackableRecyclerViewAdapter.super.setItems(items, false);
+                    setItems(items, false);
                 }
             }
         );
+    }
+
+
+
+
+    @Override
+    public final void setItems(@NonNull List<IT> items, boolean notifyAboutTheChange) {
+        Preconditions.nonNull(items);
+
+        mKeyTrackableMap.clear();
+        trackIfNecessary(items);
+
+        super.setItems(items, notifyAboutTheChange);
     }
 
 

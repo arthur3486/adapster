@@ -15,8 +15,8 @@ project.ext {
     releaseRepoName = "adapster"
     releaseUserOrg = "arthurlabs"
     releaseGroupId = "com.arthurivanets.adapster"
-    releaseVersion = "1.0.2"
-    releaseVersionCode = 5
+    releaseVersion = "1.0.3"
+    releaseVersionCode = 6
     releaseWebsite = "https://github.com/arthur3486/adapster"
     releaseLicense = ["Apache-2.0"]
 

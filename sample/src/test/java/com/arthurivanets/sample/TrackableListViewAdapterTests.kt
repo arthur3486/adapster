@@ -452,6 +452,33 @@ class TrackableListViewAdapterTests {
         adapter.addItem(item1)
 
         assertTrue(adapter.contains(item1))
+
+        // preparing the dummy data
+        val item2 = ArticleItem(Article(2, "Item 2", ""))
+        val item3 = ArticleItem(Article(3, "Item 3", ""))
+        val items = mutableListOf< BaseItem <*, *, *>>(item1, item2, item3)
+
+        // setting the new dummy dataset
+        adapter.clear()
+        adapter.items = items
+
+        //
+        assertEquals(adapter.items, items)
+
+        for(item in items) {
+            assertTrue(adapter.contains(item))
+        }
+
+        // setting the new dummy dataset
+        adapter.clear()
+        adapter.setItems(items, false)
+
+        //
+        assertEquals(adapter.items, items)
+
+        for(item in items) {
+            assertTrue(adapter.contains(item))
+        }
     }
 
 

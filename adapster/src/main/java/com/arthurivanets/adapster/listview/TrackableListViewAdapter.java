@@ -251,6 +251,23 @@ public abstract class TrackableListViewAdapter<KT, IT extends BaseItem, VH exten
 
 
     /**
+     * Adds the specified items to the Map of {@link Trackable} items.
+     * The Items must implement the {@link Trackable} interface.
+     *
+     * @param items the item to be tracked
+     */
+    protected final void trackIfNecessary(@NonNull List<IT> items) {
+        Preconditions.nonNull(items);
+
+        for(IT item : items) {
+            trackIfNecessary(item);
+        }
+    }
+
+
+
+
+    /**
      * Adds the specified item to the Map of {@link Trackable} items.
      * The Item must implement the {@link Trackable} interface.
      *
@@ -344,18 +361,13 @@ public abstract class TrackableListViewAdapter<KT, IT extends BaseItem, VH exten
 
 
     @Override
-    public void setItems(@NonNull List<IT> items) {
+    public final void setItems(@NonNull List<IT> items, boolean notifyAboutTheChange) {
         Preconditions.nonNull(items);
 
         mKeyTrackableMap.clear();
+        trackIfNecessary(items);
 
-        // keeping the track of item within a dedicated hash map
-        for(IT item : items) {
-            trackIfNecessary(item);
-        }
-
-        // updating the internal dataset
-        super.setItems(items);
+        super.setItems(items, notifyAboutTheChange);
     }
 
 
