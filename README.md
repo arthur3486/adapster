@@ -5,6 +5,7 @@
 Adapster will help you make your RecyclerView adapters more manageable and overall enrich your RecyclerView epxerience.
 
 [ ![Download](https://api.bintray.com/packages/arthurimsacc/adapster/adapster/images/download.svg) ](https://bintray.com/arthurimsacc/adapster/adapster/_latestVersion)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Adapster-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7083)
 ![](https://travis-ci.com/arthur3486/adapster.svg?branch=master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](http://developer.android.com/index.html)
