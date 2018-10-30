@@ -17,6 +17,7 @@ Adapster will help you make your RecyclerView adapters more manageable and overa
 * [Basic RecyclerView-based Implementation](#basic-recyclerview-based-implementation)
 * [Basic ListView-based Implementation](#basic-listview-based-implementation)
 * [Advanced Use](#advanced-use)
+* [Data Binding](#data-binding)
 * [Contribution](#contribution)
 * [Hall of Fame](#hall-of-fame)
 * [License](#license)
@@ -46,7 +47,7 @@ buildscript {
 ````groovy
 ext {
     //...
-    adapsterLibraryVersion = "1.0.1"
+    adapsterLibraryVersion = "1.0.4"
 }
 
 dependencies {
@@ -669,6 +670,27 @@ public final class SimpleRecyclerViewAdapter extends TrackableRecyclerViewAdapte
 
 The sample ListView-based multi-item adapter implementation can be found here [`SimpleListViewAdapter.kt`](https://github.com/arthur3486/adapster/blob/master/sample/src/main/java/com/arthurivanets/sample/adapters/SimpleListViewAdapter.kt)
 
+
+## Data Binding
+
+- **Data Binding Support**
+<br>First, make sure the `adapster-databinding` dependency is added to your `build.gradle` file, as well as the core `adapster` one.
+
+````groovy
+ext {
+    //...
+    adapsterLibraryVersion = "1.0.4"
+}
+
+dependencies {
+    //...
+    implementation "com.arthurivanets.adapster:adapster:$adapsterLibraryVersion"
+    implementation "com.arthurivanets.adapster:adapster-databinding:$adapsterLibraryVersion"
+}
+````
+
+//TODO to be continued
+
 - **More uses**
 <br>See the [Sample app](https://github.com/arthur3486/adapster/tree/master/sample/src/main/java/com/arthurivanets/sample).
 
@@ -691,7 +713,7 @@ See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
         <tr>
             <td valign="middle;">
                 <a href="https://play.google.com/store/apps/details?id=com.arthurivanets.owly">
-	                <img src="https://lh3.googleusercontent.com/V1-emL7rlp0UTZfJIN-JPpTev1ZSg2RLjC1WAgKVB0A_1ir32JxTBl8E8zz2KyJlyQ=s360" width="70" height="70"/>
+	                <img src="https://lh3.googleusercontent.com/FHaz_qNghV02MpQBEnR4K3yVGsbS_0qcUsEHidzfujI3V01zyLp6yo7oK0-ymILdRk9k=s360-rw" width="70" height="70"/>
                 </a>
             </td>
             <td valign="middle;"><b>Owly</b></td>
