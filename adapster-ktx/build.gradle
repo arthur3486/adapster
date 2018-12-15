@@ -1,0 +1,48 @@
+apply plugin: "com.android.library"
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdk
+        targetSdkVersion rootProject.targetSdk
+        versionCode rootProject.releaseVersionCode
+        versionName rootProject.releaseVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "androidx.appcompat:appcompat:${rootProject.supportLibraryVersion}"
+    implementation "androidx.recyclerview:recyclerview:${rootProject.recyclerViewVersion}"
+
+    implementation project(":adapster")
+
+    testImplementation "junit:junit:${rootProject.jUnitVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.testRunnerVersion}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.espressoVersion}"
+}
+
+ext {
+    releaseArtifact = "adapster-ktx"
+    releaseDescription = ""
+}
+
+project.archivesBaseName = "adapster-ktx"
+
+apply from: "../common/constants.gradle"
+apply from: '../gradle/script/publish.gradle'

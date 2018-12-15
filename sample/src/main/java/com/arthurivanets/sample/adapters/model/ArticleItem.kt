@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arthurivanets.adapster.Adapter
-import com.arthurivanets.adapster.listeners.ItemClickListener
+import com.arthurivanets.adapster.ktx.setOnItemClickListener
 import com.arthurivanets.adapster.listeners.OnItemClickListener
 import com.arthurivanets.adapster.markers.ItemResources
 import com.arthurivanets.adapster.model.BaseItem
@@ -65,7 +65,7 @@ class ArticleItem(itemModel : Article) : BaseItem<Article, ArticleItem.ViewHolde
 
 
     fun setOnItemClickListener(viewHolder : ViewHolder?, onItemClickListener : OnItemClickListener<ArticleItem>?) {
-        viewHolder?.itemView?.setOnClickListener(ItemClickListener(this, 0, onItemClickListener))
+        viewHolder?.itemView?.setOnItemClickListener(this, 0, onItemClickListener)
     }
 
 

@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arthurivanets.adapster.Adapter
-import com.arthurivanets.adapster.listeners.ItemClickListener
+import com.arthurivanets.adapster.ktx.setOnItemClickListener
 import com.arthurivanets.adapster.listeners.OnItemClickListener
 import com.arthurivanets.adapster.markers.ItemResources
 import com.arthurivanets.adapster.model.BaseItem
@@ -18,7 +18,7 @@ import com.arthurivanets.sample.model.FooterInfo
 import com.squareup.picasso.Picasso
 
 class FooterItem(itemModel : FooterInfo) : BaseItem<FooterInfo, FooterItem.ViewHolder, ItemResources>(itemModel),
-        Footer<BaseItem.ViewHolder<*>> {
+        Footer<FooterItem.ViewHolder> {
 
 
     override fun init(adapter : Adapter<out Item<out RecyclerView.ViewHolder, out ItemResources>>?,
@@ -48,13 +48,13 @@ class FooterItem(itemModel : FooterInfo) : BaseItem<FooterInfo, FooterItem.ViewH
     }
 
 
-    override fun setOnItemClickListener(viewHolder : BaseItem.ViewHolder<*>, onItemClickListener : OnItemClickListener<Footer<BaseItem.ViewHolder<*>>>?) {
-        viewHolder.itemView.setOnClickListener(ItemClickListener(this, 0, onItemClickListener))
+    override fun setOnItemClickListener(viewHolder : ViewHolder, onItemClickListener : OnItemClickListener<Footer<ViewHolder>>?) {
+        viewHolder.itemView.setOnItemClickListener(this, 0, onItemClickListener)
     }
 
 
     fun setOnButtonClickListener(viewHolder : ViewHolder, onButtonClickListener : OnItemClickListener<FooterItem>?) {
-        viewHolder.buttonTv.setOnClickListener(ItemClickListener(this, 0, onButtonClickListener))
+        viewHolder.buttonTv.setOnItemClickListener(this, 0, onButtonClickListener)
     }
 
 

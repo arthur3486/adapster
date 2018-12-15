@@ -39,14 +39,15 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:${rootProject.supportLibraryVersion}"
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.coordinatorLayoutVersion}"
-    implementation "androidx.recyclerview:recyclerview:${rootProject.supportLibraryVersion}"
-    implementation "androidx.cardview:cardview:${rootProject.supportLibraryVersion}"
+    implementation "androidx.recyclerview:recyclerview:${rootProject.recyclerViewVersion}"
+    implementation "androidx.cardview:cardview:1.0.0"
     implementation "com.squareup.picasso:picasso:2.5.2"
     implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0"
-    implementation "androidx.core:core-ktx:1.0.0-alpha1"
+    implementation "androidx.core:core-ktx:1.0.1"
     testImplementation "junit:junit:${rootProject.jUnitVersion}"
     testImplementation "org.robolectric:robolectric:${rootProject.robolectricVersion}"
     androidTestImplementation "androidx.test:runner:${rootProject.testRunnerVersion}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.espressoVersion}"
     implementation project(path: ":adapster")
+    implementation project(path: ":adapster-ktx")
 }

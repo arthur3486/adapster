@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arthurivanets.adapster.Adapter
-import com.arthurivanets.adapster.listeners.ItemClickListener
+import com.arthurivanets.adapster.ktx.setOnItemClickListener
 import com.arthurivanets.adapster.listeners.OnItemClickListener
 import com.arthurivanets.adapster.markers.ItemResources
 import com.arthurivanets.adapster.model.BaseItem
@@ -18,7 +18,7 @@ import com.arthurivanets.sample.model.Topic
 import com.squareup.picasso.Picasso
 
 class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemResources>(itemModel),
-        Header<BaseItem.ViewHolder<*>> {
+        Header<TopicItem.ViewHolder> {
 
 
     override fun init(adapter : Adapter<out Item<out RecyclerView.ViewHolder, out ItemResources>>?,
@@ -47,8 +47,8 @@ class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemR
     }
 
 
-    override fun setOnItemClickListener(viewHolder : BaseItem.ViewHolder<*>, onItemClickListener : OnItemClickListener<Header<BaseItem.ViewHolder<*>>>?) {
-        viewHolder.itemView.setOnClickListener(ItemClickListener(this, 0, onItemClickListener))
+    override fun setOnItemClickListener(viewHolder : ViewHolder, onItemClickListener : OnItemClickListener<Header<ViewHolder>>?) {
+        viewHolder.itemView.setOnItemClickListener(this, 0, onItemClickListener)
     }
 
 

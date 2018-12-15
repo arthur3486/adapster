@@ -38,7 +38,7 @@ public interface SupportsHeader<VH extends RecyclerView.ViewHolder> {
      *
      * @param header the Header Item to be added to the dataset
      */
-    void addHeader(@NonNull Header<VH> header);
+    <VHT extends VH> void addHeader(@NonNull Header<VHT> header);
 
     /**
      * Removes the Header Item from the dataset (if there's any).

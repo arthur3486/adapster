@@ -19,6 +19,7 @@ package com.arthurivanets.adapster.listeners;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * A contract-interface for the observation of the dataset-related events.
@@ -35,7 +36,7 @@ public interface OnDatasetChangeListener<DS extends List<IT>, IT> {
      * @param dataset the dataset
      * @param item the added item
      */
-    void onItemAdded(@NonNull DS dataset, @NonNull IT item);
+    void onItemAdded(@NonNull DS dataset, @Nullable IT item);
 
     /**
      * Called when the item, contained by the dataset, is updated.
@@ -43,7 +44,7 @@ public interface OnDatasetChangeListener<DS extends List<IT>, IT> {
      * @param dataset the dataset
      * @param item the updated item
      */
-    void onItemUpdated(@NonNull DS dataset, @NonNull IT item);
+    void onItemUpdated(@NonNull DS dataset, @Nullable IT item);
 
     /**
      * Called when the item, contained by the dataset, is replaced with a new one.
@@ -52,7 +53,7 @@ public interface OnDatasetChangeListener<DS extends List<IT>, IT> {
      * @param oldItem the old item (replaced)
      * @param newItem the new item (replacement)
      */
-    void onItemReplaced(@NonNull DS dataset, @NonNull IT oldItem, @NonNull IT newItem);
+    void onItemReplaced(@NonNull DS dataset, @Nullable IT oldItem, @Nullable IT newItem);
 
     /**
      * Called when the item is deleted from the dataset.
@@ -60,7 +61,15 @@ public interface OnDatasetChangeListener<DS extends List<IT>, IT> {
      * @param dataset the dataset
      * @param item the deleted item
      */
-    void onItemDeleted(@NonNull DS dataset, @NonNull IT item);
+    void onItemDeleted(@NonNull DS dataset, @Nullable IT item);
+
+    /**
+     * Called when the interaction with the Dataset resulted in the changes of its size.
+     *
+     * @param oldSize the size of the dataset before the modification
+     * @param newSize the size of the dataset after the modification
+     */
+    void onDatasetSizeChanged(int oldSize, int newSize);
 
     /**
      * Called when the dataset is replaced with a new one.

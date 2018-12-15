@@ -108,12 +108,16 @@ public abstract class BaseItem<IM, VH extends BaseItem.ViewHolder<IM>, IR extend
 
 
     @Override
-    public boolean equals(Object obj) {
-        if(obj instanceof BaseItem) {
-            return getItemModel().equals(((BaseItem) obj).getItemModel());
-        }
+    public int hashCode() {
+        return ((getItemModel() != null) ? getItemModel().hashCode() : super.hashCode());
+    }
 
-        return super.equals(obj);
+
+
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((obj instanceof BaseItem) && (obj.hashCode() == hashCode()));
     }
 
 

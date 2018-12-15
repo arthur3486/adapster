@@ -1,1 +1,1 @@
-include ':sample', ':adapster'
+include ':sample', ':adapster', ':adapster-databinding', ':adapster-ktx'

@@ -328,6 +328,21 @@ public abstract class BaseRecyclerViewAdapter<IT extends BaseItem, VH extends Ba
 
 
     /**
+     * Notifies the Dataset Change Observers about the Dataset size changes.
+     *
+     * @param oldSize
+     * @param newSize
+     */
+    protected final void notifyDatasetSizeChanged(int oldSize, int newSize) {
+        for(OnDatasetChangeListener<List<IT>, IT> listener : mOnDatasetChangeListeners) {
+            listener.onDatasetSizeChanged(oldSize, newSize);
+        }
+    }
+
+
+
+
+    /**
      * Notifies the Dataset Change Observers about the replacement of the dataset.
      *
      * @param newDataset the new replacement dataset
@@ -528,6 +543,7 @@ public abstract class BaseRecyclerViewAdapter<IT extends BaseItem, VH extends Ba
     public void setItems(@NonNull List<IT> items, boolean notifyAboutTheChange) {
         Preconditions.nonNull(items);
 
+        final int itemCount = getItemCount();
         mItems = items;
 
         if(notifyAboutTheChange) {
@@ -535,6 +551,7 @@ public abstract class BaseRecyclerViewAdapter<IT extends BaseItem, VH extends Ba
         }
 
         notifyDatasetReplaced(mItems);
+        notifyDatasetSizeChanged(itemCount, getItemCount());
     }
 
 

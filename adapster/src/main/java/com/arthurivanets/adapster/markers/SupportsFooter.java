@@ -38,7 +38,7 @@ public interface SupportsFooter<VH extends RecyclerView.ViewHolder> {
      *
      * @param footer the Footer Item to be added to the dataset
      */
-    void addFooter(@NonNull Footer<VH> footer);
+    <VHT extends VH> void addFooter(@NonNull Footer<VHT> footer);
 
     /**
      * Removes the Footer Item from the dataset (if there's any).

@@ -19,6 +19,7 @@ package com.arthurivanets.adapster.listeners;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * A convenience abstract class which implements the methods of the {@link OnDatasetChangeListener}.
@@ -33,7 +34,7 @@ public abstract class DatasetChangeListenerAdapter<DS extends List<IT>, IT> impl
 
 
     @Override
-    public void onItemAdded(@NonNull DS dataset, @NonNull IT item) {
+    public void onItemAdded(@NonNull DS dataset, @Nullable IT item) {
 
     }
 
@@ -41,7 +42,7 @@ public abstract class DatasetChangeListenerAdapter<DS extends List<IT>, IT> impl
 
 
     @Override
-    public void onItemUpdated(@NonNull DS dataset, @NonNull IT item) {
+    public void onItemUpdated(@NonNull DS dataset, @Nullable IT item) {
 
     }
 
@@ -49,7 +50,7 @@ public abstract class DatasetChangeListenerAdapter<DS extends List<IT>, IT> impl
 
 
     @Override
-    public void onItemReplaced(@NonNull DS dataset, @NonNull IT oldItem, @NonNull IT newItem) {
+    public void onItemReplaced(@NonNull DS dataset, @Nullable IT oldItem, @Nullable IT newItem) {
 
     }
 
@@ -57,7 +58,15 @@ public abstract class DatasetChangeListenerAdapter<DS extends List<IT>, IT> impl
 
 
     @Override
-    public void onItemDeleted(@NonNull DS dataset, @NonNull IT item) {
+    public void onItemDeleted(@NonNull DS dataset, @Nullable IT item) {
+
+    }
+
+
+
+
+    @Override
+    public void onDatasetSizeChanged(int oldSize, int newSize) {
 
     }
 

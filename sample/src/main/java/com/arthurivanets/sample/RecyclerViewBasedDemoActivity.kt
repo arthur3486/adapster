@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthurivanets.adapster.listeners.OnItemClickListener
 import com.arthurivanets.adapster.listeners.OnItemLongClickListener
@@ -13,6 +12,7 @@ import com.arthurivanets.sample.adapters.SimpleRecyclerViewAdapter
 import com.arthurivanets.sample.adapters.model.*
 import com.arthurivanets.sample.model.Suggestions
 import com.arthurivanets.sample.util.DataProvider
+import com.arthurivanets.sample.util.toast
 import kotlinx.android.synthetic.main.recycler_view_based_demo_activity_layout.*
 
 class RecyclerViewBasedDemoActivity : AppCompatActivity() {

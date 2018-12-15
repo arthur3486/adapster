@@ -534,21 +534,25 @@ class TrackableListViewAdapterTests {
         adapter.removeAllOnDatasetChangeListeners()
         adapter.addOnDatasetChangeListener(object : OnDatasetChangeListener<MutableList<BaseItem<*, *, *>>, BaseItem<*, *, *>> {
 
-            override fun onItemAdded(dataset : MutableList<BaseItem<*, *, *>>, item : BaseItem<*, *, *>) {
+            override fun onItemAdded(dataset : MutableList<BaseItem<*, *, *>>, item : BaseItem<*, *, *>?) {
                 assertEquals(item, item4)
             }
 
-            override fun onItemUpdated(dataset : MutableList<BaseItem<*, *, *>>, item : BaseItem<*, *, *>) {
+            override fun onItemUpdated(dataset : MutableList<BaseItem<*, *, *>>, item : BaseItem<*, *, *>?) {
                 assertEquals(item, item1)
             }
 
-            override fun onItemReplaced(dataset : MutableList<BaseItem<*, *, *>>, oldItem : BaseItem<*, *, *>, newItem : BaseItem<*, *, *>) {
+            override fun onItemReplaced(dataset : MutableList<BaseItem<*, *, *>>, oldItem : BaseItem<*, *, *>?, newItem : BaseItem<*, *, *>?) {
                 assertEquals(oldItem, item4)
                 assertEquals(newItem, item4b)
             }
 
-            override fun onItemDeleted(dataset : MutableList<BaseItem<*, *, *>>, item : BaseItem<*, *, *>) {
+            override fun onItemDeleted(dataset : MutableList<BaseItem<*, *, *>>, item : BaseItem<*, *, *>?) {
                 assertEquals(item, item1)
+            }
+
+            override fun onDatasetSizeChanged(oldSize : Int, newSize : Int) {
+                //
             }
 
             override fun onDatasetReplaced(newDataset : MutableList<BaseItem<*, *, *>>) {

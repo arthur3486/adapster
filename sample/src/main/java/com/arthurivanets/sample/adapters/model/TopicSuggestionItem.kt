@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arthurivanets.adapster.Adapter
-import com.arthurivanets.adapster.listeners.ItemClickListener
-import com.arthurivanets.adapster.listeners.ItemLongClickListener
+import com.arthurivanets.adapster.ktx.setOnItemClickListener
+import com.arthurivanets.adapster.ktx.setOnItemLongClickListener
 import com.arthurivanets.adapster.listeners.OnItemClickListener
 import com.arthurivanets.adapster.listeners.OnItemLongClickListener
 import com.arthurivanets.adapster.markers.ItemResources
@@ -55,12 +55,12 @@ class TopicSuggestionItem(itemModel : Topic) : BaseItem<Topic, TopicSuggestionIt
 
 
     fun setOnItemClickListener(viewHolder : ViewHolder, onItemClickListener : OnItemClickListener<TopicSuggestionItem>?) {
-        viewHolder.itemView.setOnClickListener(ItemClickListener(this, 0, onItemClickListener))
+        viewHolder.itemView.setOnItemClickListener(this, 0, onItemClickListener)
     }
 
 
     fun setOnItemLongClickListener(viewHolder : ViewHolder, onItemLongClickListener : OnItemLongClickListener<TopicSuggestionItem>?) {
-        viewHolder.itemView.setOnLongClickListener(ItemLongClickListener(this, 0, onItemLongClickListener))
+        viewHolder.itemView.setOnItemLongClickListener(this, 0, onItemLongClickListener)
     }
 
 

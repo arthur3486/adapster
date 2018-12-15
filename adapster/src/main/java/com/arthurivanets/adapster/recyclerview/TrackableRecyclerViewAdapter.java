@@ -107,6 +107,7 @@ public abstract class TrackableRecyclerViewAdapter<KT, IT extends BaseItem, VH e
 
         // notifying about the dataset change
         notifyItemAdded(item);
+        notifyDatasetSizeChanged(itemCount, getItemCount());
     }
 
 
@@ -157,6 +158,8 @@ public abstract class TrackableRecyclerViewAdapter<KT, IT extends BaseItem, VH e
     public void deleteItem(int position) {
         Preconditions.withinBoundsExclusive(position, getItems());
 
+        final int itemCount = getItemCount();
+
         // removing the actual item, as well as untracking it (if necessary)
         final IT removedItem = getItems().remove(position);
         untrackIfNecessary(removedItem);
@@ -164,6 +167,7 @@ public abstract class TrackableRecyclerViewAdapter<KT, IT extends BaseItem, VH e
         // notifying about the change
         notifyItemRemoved(position);
         notifyItemDeleted(removedItem);
+        notifyDatasetSizeChanged(itemCount, getItemCount());
     }
 
 
@@ -171,7 +175,7 @@ public abstract class TrackableRecyclerViewAdapter<KT, IT extends BaseItem, VH e
 
     @SuppressWarnings("unchecked")
     @Override
-    public final void addHeader(@NonNull Header<VH> header) {
+    public final <VHT extends VH> void addHeader(@NonNull Header<VHT> header) {
         Preconditions.nonNull(header);
         Preconditions.isTrue("The Header Item must be based on BaseItem", (header instanceof BaseItem));
 
@@ -193,7 +197,7 @@ public abstract class TrackableRecyclerViewAdapter<KT, IT extends BaseItem, VH e
 
     @SuppressWarnings("unchecked")
     @Override
-    public final void addFooter(@NonNull Footer<VH> footer) {
+    public final <VHT extends VH> void addFooter(@NonNull Footer<VHT> footer) {
         Preconditions.nonNull(footer);
         Preconditions.isTrue("The Footer Item must be based on BaseItem", (footer instanceof BaseItem));
 
@@ -395,11 +399,14 @@ public abstract class TrackableRecyclerViewAdapter<KT, IT extends BaseItem, VH e
 
     @Override
     public void clear() {
+        final int itemCount = getItemCount();
+
         getItems().clear();
         mKeyTrackableMap.clear();
 
         // notifying about the performed event
         notifyDataSetChanged();
+        notifyDatasetSizeChanged(itemCount, getItemCount());
         notifyDatasetCleared(getItems());
     }
 
