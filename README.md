@@ -107,10 +107,10 @@ Let's implement a basic RecyclerView-based concept by following the steps listed
     
 ````kotlin
 data class Article(
-	val id : Int,
-	val title : String,
-	val text : String,
-	val imageUrl : String = ""
+    val id : Int,
+    val title : String,
+    val text : String,
+    val imageUrl : String = ""
 ) {
 
     val hasImage : Boolean
@@ -127,23 +127,23 @@ data class Article(
 ````java
 public final class Article {
 
-	private int id;
-	private String title;
-	private String text;
-	private String imageUrl;
+    private int id;
+    private String title;
+    private String text;
+    private String imageUrl;
 
-	public Article() {
-		this.id = -1;
-		this.title = "";
-		this.text = "";
-		this.imageUrl = "";
-	}
+    public Article() {
+    	this.id = -1;
+    	this.title = "";
+    	this.text = "";
+    	this.imageUrl = "";
+    }
 
-	// Setters and Getters...
+    // Setters and Getters...
 
-	public final boolean hasImage() {
-		return !TextUtils.isEmpty(this.imageUrl);
-	}
+    public final boolean hasImage() {
+    	return !TextUtils.isEmpty(this.imageUrl);
+    }
 
 }
 ````
@@ -247,11 +247,11 @@ public final class ArticleItem extends BaseItem<Article, ArticleItem.ViewHolder,
 
     public static class ViewHolder extends BaseItem.ViewHolder<Article> {
 
-	    public ViewHolder(View itemView) {
-		    super(itemView);
+        public ViewHolder(View itemView) {
+	    super(itemView);
 
-		    // look up (or initialize) your views here...
-	    }
+            // look up (or initialize) your views here...
+        }
 
     }
 
@@ -269,8 +269,8 @@ public final class ArticleItem extends BaseItem<Article, ArticleItem.ViewHolder,
     
 ````kotlin
 class ArticlesRecyclerViewAdapter(
-	context : Context,
-	items : MutableList<ArticleItem>
+    context : Context,
+    items : MutableList<ArticleItem>
 ) : TrackableRecyclerViewAdapter<Long, ArticleItem, ArticleItem.ViewHolder>(context, items) {
 
     var onArticleItemClickListener : OnItemClickListener<ArticleItem>? = null
@@ -390,8 +390,8 @@ Here's the implementation of the `ArticlesListViewAdapter`
     
 ````kotlin
 class ArticlesListViewAdapter(
-	context : Context,
-	items : MutableList<ArticleItem>
+    context : Context,
+    items : MutableList<ArticleItem>
 ) : TrackableListViewAdapter<Long, ArticleItem, ArticleItem.ViewHolder>(context, items) {
 
     var onItemClickListener : OnItemClickListener<ArticleItem>? = null
