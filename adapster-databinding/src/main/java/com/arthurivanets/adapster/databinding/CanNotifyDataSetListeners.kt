@@ -17,42 +17,50 @@
 package com.arthurivanets.adapster.databinding
 
 /**
- *
+ * A contract to be implemented by the concrete versions of the Observable Adapters,
+ * in order to provide the dataset change notification handling capabilities.
  */
 interface CanNotifyDataSetListeners<IT, DS : List<IT>> {
 
     /**
-     *
+     * Notifies all the registered adapter dataset change listeners
+     * about the fact that the new item has been added to the underlying dataset.
      */
     fun notifyDataSetItemAdded(item : IT)
 
     /**
-     *
+     * Notifies all the registered adapter dataset change listeners
+     * about the fact that the specified item has been updated within the underlying dataset.
      */
     fun notifyDataSetItemUpdated(item : IT)
 
     /**
-     *
+     * Notifies all the registered adapter dataset change listeners
+     * about the fact that the specified old item has been replaced with a new item within the underlying dataset.
      */
     fun notifyDataSetItemReplaced(oldItem : IT, newItem : IT)
 
     /**
-     *
+     * Notifies all the registered adapter dataset change listeners
+     * about the fact that the specified item has been removed from the underlying dataset.
      */
     fun notifyDataSetItemRemoved(item : IT)
 
     /**
-     *
+     * Notifies all the registered adapter dataset change listeners
+     * about the fact that the size of the underlying dataset has changed.
      */
     fun notifyDataSetSizeChanged(oldSize : Int, newSize : Int)
 
     /**
-     *
+     * Notifies all the registered adapter dataset change listeners
+     * about the fact that the underlying dataset has been replaced with a new one.
      */
     fun notifyDataSetReplaced(items : DS)
 
     /**
-     *
+     * Notifies all the registered adapter dataset change listeners
+     * about the fact that the underlying dataset has been cleared.
      */
     fun notifyDataSetCleared(items : DS)
 

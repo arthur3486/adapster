@@ -49,6 +49,7 @@ public interface Item<VH extends RecyclerView.ViewHolder, IR extends ItemResourc
      * @param resources reusable resources
      * @return the created Item View Holder
      */
+    @NonNull
     VH init(@Nullable Adapter<? extends Item> adapter,
             @NonNull ViewGroup parent,
             @NonNull LayoutInflater inflater,

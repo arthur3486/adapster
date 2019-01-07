@@ -35,7 +35,9 @@ public class ItemLongClickListener<T> implements View.OnLongClickListener {
 
 
 
-    public ItemLongClickListener(T item, int position, OnItemLongClickListener<T> onItemLongClickListener) {
+    public ItemLongClickListener(T item,
+                                 int position,
+                                 OnItemLongClickListener<T> onItemLongClickListener) {
         mItem = item;
         mPosition = position;
         mOnItemLongClickListener = onItemLongClickListener;

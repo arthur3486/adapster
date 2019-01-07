@@ -23,7 +23,7 @@ import com.arthurivanets.adapster.model.BaseItem
 import com.arthurivanets.adapster.recyclerview.TrackableRecyclerViewAdapter
 
 /**
- *
+ * A base Adapter implementation to be used for your concrete Adapters when using Data Binding.
  */
 abstract class ObservableTrackableRecyclerViewAdapter<KT : Any, IT : BaseItem<*, *, *>, VH : BaseItem.ViewHolder<*>>(
     context : Context,

@@ -25,11 +25,14 @@ import com.arthurivanets.adapster.recyclerview.TrackableRecyclerViewAdapter
 
 
 /**
+ * The specified action will be executed, if the current object is [Trackable].
  *
+ * @param action the action to be executed when the conditions are satisfied
+ * @return the corresponding [Trackable] if the current object is indeed trackable, or <strong>null</strong otherwise
  */
-inline fun <T> Any.ifTrackable(block : (Trackable<T>) -> Unit = {}) : Trackable<T>? {
+inline fun <T> Any.ifTrackable(action : (Trackable<T>) -> Unit = {}) : Trackable<T>? {
     return if(isTrackable()) {
-        block(this as Trackable<T>)
+        action(this as Trackable<T>)
         this
     } else {
         null
@@ -38,7 +41,9 @@ inline fun <T> Any.ifTrackable(block : (Trackable<T>) -> Unit = {}) : Trackable<
 
 
 /**
+ * Determines whether the current object is [Trackable].
  *
+ * @return <strong>true</strong> if the current object is indeed [Trackable], <strong>false</strong> otherwise
  */
 fun Any.isTrackable() : Boolean {
     return (this is Trackable<*>)
@@ -46,7 +51,9 @@ fun Any.isTrackable() : Boolean {
 
 
 /**
+ * Casts the current object to a [Trackable] (if possible).
  *
+ * @throws ClassCastException if the current object isn't an instance of [Trackable]
  */
 fun <T> Any.asTrackable() : Trackable<T> {
     return (this as Trackable<T>)
@@ -54,20 +61,29 @@ fun <T> Any.asTrackable() : Trackable<T> {
 
 
 /**
+ * Executes the specified action, if the current instance of the [TrackableRecyclerViewAdapter] can be notified about the dataset changes
+ * (is an instance of the [CanNotifyDataSetListeners]).
  *
+ * @param action the action to be executed when the conditions are satisfied
  */
-inline fun <KT, IT : BaseItem<*, *, *>> TrackableRecyclerViewAdapter<KT, IT, *>.ifCanNotifyDataSetListeners(block : CanNotifyDataSetListeners<IT, MutableList<IT>>.() -> Unit) {
+inline fun <KT, IT : BaseItem<*, *, *>> TrackableRecyclerViewAdapter<KT, IT, *>.ifCanNotifyDataSetListeners(action : CanNotifyDataSetListeners<IT, MutableList<IT>>.() -> Unit) {
     if(this is CanNotifyDataSetListeners<*, *>) {
-        block(this as CanNotifyDataSetListeners<IT, MutableList<IT>>)
+        action(this as CanNotifyDataSetListeners<IT, MutableList<IT>>)
     }
 }
 
 
 /**
+ * Iterates over the specified range of the items and executes the specified action for each of them.
  *
+ * @param startIndex the start index of the range
+ * @param endIndex the end index of the range
+ * @param action the action to be executed for each corresponding item found within the specified range
  */
-inline fun <T> List<T>.forEachInRange(startIndex : Int, endIndex : Int, block : (T) -> Unit) {
+inline fun <T> List<T>.forEachInRange(startIndex : Int,
+                                      endIndex : Int,
+                                      action : (T) -> Unit) {
     for(index in Math.max(startIndex, 0)..Math.min(endIndex, (size - 1))) {
-        block(this[index])
+        action(this[index])
     }
 }

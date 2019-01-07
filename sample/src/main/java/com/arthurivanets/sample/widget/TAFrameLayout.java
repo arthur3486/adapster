@@ -25,9 +25,6 @@ import android.widget.FrameLayout;
 
 import com.arthurivanets.sample.widget.markers.Roundable;
 
-/**
- * Created by arthur3486
- */
 public class TAFrameLayout extends FrameLayout implements Roundable {
 
 

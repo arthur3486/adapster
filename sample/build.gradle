@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.arthurivanets.sample"
-        minSdkVersion 18
+        minSdkVersion rootProject.minSdk
         targetSdkVersion rootProject.targetSdk
         versionCode rootProject.releaseVersionCode
         versionName rootProject.releaseVersion
@@ -38,7 +38,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:${rootProject.supportLibraryVersion}"
-    implementation "androidx.constraintlayout:constraintlayout:${rootProject.coordinatorLayoutVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintLayoutVersion}"
     implementation "androidx.recyclerview:recyclerview:${rootProject.recyclerViewVersion}"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "com.squareup.picasso:picasso:2.5.2"

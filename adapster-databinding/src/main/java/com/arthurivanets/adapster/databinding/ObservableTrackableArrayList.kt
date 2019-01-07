@@ -24,7 +24,7 @@ import com.arthurivanets.adapster.model.markers.Trackable
 import java.util.*
 
 /**
- *
+ * An implementation of a default observable dataset with item tracking capabilities.
  */
 open class ObservableTrackableArrayList<KT : Any, IT : Any> : ObservableArrayList<IT>(), TrackableList<KT, IT> {
 

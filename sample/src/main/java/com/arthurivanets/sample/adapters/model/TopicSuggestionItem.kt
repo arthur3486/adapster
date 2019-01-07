@@ -1,3 +1,19 @@
+/*
+ * Copyright 2017 Arthur Ivanets, arthur.ivanets.l@gmail.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.arthurivanets.sample.adapters.model
 
 import android.view.LayoutInflater
@@ -27,7 +43,7 @@ class TopicSuggestionItem(itemModel : Topic) : BaseItem<Topic, TopicSuggestionIt
                       inflater : LayoutInflater,
                       resources : ItemResources?) : ViewHolder {
         return ViewHolder(inflater.inflate(
-            MAIN_LAYOUT_ID,
+            layout,
             parent,
             false
         ))
@@ -54,18 +70,18 @@ class TopicSuggestionItem(itemModel : Topic) : BaseItem<Topic, TopicSuggestionIt
     }
 
 
-    fun setOnItemClickListener(viewHolder : ViewHolder, onItemClickListener : OnItemClickListener<TopicSuggestionItem>?) {
+    fun setOnItemClickListener(viewHolder : ViewHolder, onItemClickListener : OnItemClickListener<TopicSuggestionItem>) {
         viewHolder.itemView.setOnItemClickListener(this, 0, onItemClickListener)
     }
 
 
-    fun setOnItemLongClickListener(viewHolder : ViewHolder, onItemLongClickListener : OnItemLongClickListener<TopicSuggestionItem>?) {
+    fun setOnItemLongClickListener(viewHolder : ViewHolder, onItemLongClickListener : OnItemLongClickListener<TopicSuggestionItem>) {
         viewHolder.itemView.setOnItemLongClickListener(this, 0, onItemLongClickListener)
     }
 
 
     override fun getLayout() : Int {
-        return MAIN_LAYOUT_ID
+        return R.layout.topic_suggestion_item_layout
     }
 
 
@@ -73,13 +89,6 @@ class TopicSuggestionItem(itemModel : Topic) : BaseItem<Topic, TopicSuggestionIt
 
         val imageIv = itemView.findViewById<ImageView>(R.id.imageIv)
         val nameTv = itemView.findViewById<TextView>(R.id.nameTv)
-
-    }
-
-
-    companion object {
-
-        @JvmStatic val MAIN_LAYOUT_ID : Int = R.layout.topic_suggestion_item_layout
 
     }
 

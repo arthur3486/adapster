@@ -16,6 +16,8 @@
 
 package com.arthurivanets.adapster.model.markers;
 
+import androidx.annotation.NonNull;
+
 /**
  * A marker interface that's to implemented by the Items that are considered captionable.
  *
@@ -28,6 +30,7 @@ public interface Captionable {
      *
      * @return the retrieved caption
      */
+    @NonNull
     String getCaption();
 
 }

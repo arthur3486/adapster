@@ -1,3 +1,19 @@
+/*
+ * Copyright 2017 Arthur Ivanets, arthur.ivanets.l@gmail.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.arthurivanets.sample.adapters.model
 
 import android.view.LayoutInflater
@@ -7,7 +23,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arthurivanets.adapster.Adapter
-import com.arthurivanets.adapster.ktx.setOnItemClickListener
+import com.arthurivanets.adapster.listeners.ItemClickListener
 import com.arthurivanets.adapster.listeners.OnItemClickListener
 import com.arthurivanets.adapster.markers.ItemResources
 import com.arthurivanets.adapster.model.BaseItem
@@ -26,7 +42,7 @@ class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemR
                       inflater : LayoutInflater,
                       resources : ItemResources?) : ViewHolder {
         return ViewHolder(inflater.inflate(
-            MAIN_LAYOUT_ID,
+            layout,
             parent,
             false
         ))
@@ -48,12 +64,12 @@ class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemR
 
 
     override fun setOnItemClickListener(viewHolder : ViewHolder, onItemClickListener : OnItemClickListener<Header<ViewHolder>>?) {
-        viewHolder.itemView.setOnItemClickListener(this, 0, onItemClickListener)
+        viewHolder.itemView.setOnClickListener(ItemClickListener(this, 0, onItemClickListener))
     }
 
 
     override fun getLayout() : Int {
-        return MAIN_LAYOUT_ID
+        return R.layout.topic_item_layout
     }
 
 
@@ -61,13 +77,6 @@ class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemR
 
         val imageIv = itemView.findViewById<ImageView>(R.id.imageIv)
         val nameTv = itemView.findViewById<TextView>(R.id.nameTv)
-
-    }
-
-
-    companion object {
-
-        @JvmStatic val MAIN_LAYOUT_ID : Int = R.layout.topic_item_layout
 
     }
 

@@ -36,7 +36,9 @@ public class ItemTouchListener<T> implements View.OnTouchListener {
 
 
 
-    public ItemTouchListener(T item, int position, OnItemTouchListener<T> onItemTouchListener) {
+    public ItemTouchListener(T item,
+                             int position,
+                             OnItemTouchListener<T> onItemTouchListener) {
         mItem = item;
         mPosition = position;
         mOnItemTouchListener = onItemTouchListener;

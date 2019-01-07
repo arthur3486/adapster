@@ -19,28 +19,39 @@ package com.arthurivanets.adapster.databinding
 import com.arthurivanets.adapster.model.markers.Trackable
 
 /**
- *
+ * A base contract to be implemented by the concrete collections in order to provide
+ * the item tracking capabilities.
  */
 interface TrackableList<KT : Any, IT : Any> : MutableList<IT> {
 
     /**
+     * Replaces the items within the current dataset with the specified ones, using the predicate
+     * to allow you to make the final decision on whether to apply the calculated changes or not.
+     *
      * @param items items to be added to the dataset
      * @param predicate predicate used to determine whether to apply the calculated dataset change associated with the specified item.
      */
     fun setItems(items : List<IT>, predicate : (IT) -> Boolean = { true })
 
     /**
+     * Determines whether the current dataset contains an item that corresponds to the specified key.
      *
+     * @return <strong>true</strong> if the corresponding item is present, <strong>false</strong> otherwise
      */
     fun containsByKey(key : KT) : Boolean
 
     /**
+     * Attempts to retrieve a [Trackable] from the current dataset that corresponds to the specified key.
      *
+     * @return the corresponding [Trackable] if there's any, or <strong>null</strong> otherwise
      */
     fun getTrackable(key : KT) : Trackable<KT>?
 
     /**
+     * Attempts to retrieve a [Trackable] from the current dataset that corresponds to the specified key,
+     * and cast it to the specified type thereafter.
      *
+     * @return the corresponding [Trackable] cast to type [T], or <strong>null</strong> otherwise
      */
     fun <T> getTrackableAs(key : KT) : T?
 

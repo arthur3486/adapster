@@ -17,9 +17,9 @@
 package com.arthurivanets.adapster.model.markers;
 
 import com.arthurivanets.adapster.listeners.OnItemClickListener;
-import com.arthurivanets.adapster.markers.ItemResources;
-import com.arthurivanets.adapster.model.Item;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @param <VH> the view holder type
  * @author arthur3486
  */
-public interface Header<VH extends RecyclerView.ViewHolder> extends Item<VH, ItemResources> {
+public interface Header<VH extends RecyclerView.ViewHolder> {
 
     /**
      * Sets the click listener responsible for handling the Header Item click events.
@@ -36,6 +36,6 @@ public interface Header<VH extends RecyclerView.ViewHolder> extends Item<VH, Ite
      * @param viewHolder
      * @param onItemClickListener
      */
-    void setOnItemClickListener(VH viewHolder, OnItemClickListener<Header<VH>> onItemClickListener);
+    void setOnItemClickListener(@NonNull VH viewHolder, @Nullable OnItemClickListener<Header<VH>> onItemClickListener);
 
 }

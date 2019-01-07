@@ -23,7 +23,7 @@ import com.arthurivanets.adapster.model.BaseItem
 import com.arthurivanets.adapster.recyclerview.TrackableRecyclerViewAdapter
 
 /**
- *
+ * An implementation of the Adapter Dataset Change Handler designed specifically for the Observable Adapters & Datasets.
  */
 open class ObservableTrackableRecyclerViewAdapterDataSetChangeHandler<KT, IT : BaseItem<*, *, *>> : ObservableList.OnListChangedCallback<ObservableList<IT>>() {
 
@@ -52,7 +52,7 @@ open class ObservableTrackableRecyclerViewAdapterDataSetChangeHandler<KT, IT : B
             sender?.forEachInRange(
                 startIndex = positionStart,
                 endIndex = (positionStart + itemCount - 1),
-                block = ::notifyDataSetItemAdded
+                action = ::notifyDataSetItemAdded
             )
         }
         adapter?.notifyItemRangeInserted(positionStart, itemCount)
@@ -79,7 +79,7 @@ open class ObservableTrackableRecyclerViewAdapterDataSetChangeHandler<KT, IT : B
             sender?.forEachInRange(
                 startIndex = positionStart,
                 endIndex = (positionStart + itemCount - 1),
-                block = ::notifyDataSetItemUpdated
+                action = ::notifyDataSetItemUpdated
             )
         }
         adapter?.notifyItemRangeChanged(positionStart, itemCount)

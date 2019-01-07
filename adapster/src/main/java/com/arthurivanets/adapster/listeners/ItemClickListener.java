@@ -35,7 +35,9 @@ public class ItemClickListener<T> implements View.OnClickListener {
 
 
 
-    public ItemClickListener(T item, int position, OnItemClickListener<T> onItemClickListener) {
+    public ItemClickListener(T item,
+                             int position,
+                             OnItemClickListener<T> onItemClickListener) {
         mItem = item;
         mPosition = position;
         mOnItemClickListener = onItemClickListener;

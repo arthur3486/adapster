@@ -16,6 +16,8 @@
 
 package com.arthurivanets.adapster.model.markers;
 
+import androidx.annotation.NonNull;
+
 /**
  * A marker class that's to be implemented by the Items that need to be made "unique" within the Trackable Adapters.
  *
@@ -29,6 +31,7 @@ public interface Trackable<KT> {
      *
      * @return the track key
      */
+    @NonNull
     KT getTrackKey();
 
 }
