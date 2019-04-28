@@ -9,6 +9,7 @@ Adapster will help you make your RecyclerView adapters more manageable and overa
 ![](https://travis-ci.org/arthur3486/adapster.svg?branch=master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](http://developer.android.com/index.html)
+![](https://img.shields.io/badge/API-18%2B-green.svg?style=flat)
 
 ## Contents
 
@@ -47,7 +48,7 @@ buildscript {
 ````groovy
 ext {
     //...
-    adapsterLibraryVersion = "1.0.4"
+    adapsterLibraryVersion = "1.0.9"
 }
 
 dependencies {
@@ -83,7 +84,7 @@ android {
 //...
 dependencies {
     //...
-    implementation "androidx.appcompat:appcompat:1.0.0-beta01"
+    implementation "androidx.appcompat:appcompat:1.0.2"
     //...
 }
 //...
@@ -106,10 +107,12 @@ Let's implement a basic RecyclerView-based concept by following the steps listed
 <p>
     
 ````kotlin
-data class Article(val id : Int,
-                   val title : String,
-                   val text : String,
-                   val imageUrl : String = "") {
+data class Article(
+    val id : Int,
+    val title : String,
+    val text : String,
+    val imageUrl : String = ""
+) {
 
     val hasImage : Boolean
         get() = !imageUrl.isBlank()
@@ -125,23 +128,23 @@ data class Article(val id : Int,
 ````java
 public final class Article {
 
-	private int id;
-	private String title;
-	private String text;
-	private String imageUrl;
+    private int id;
+    private String title;
+    private String text;
+    private String imageUrl;
 
-	public Article() {
-		this.id = -1;
-		this.title = "";
-		this.text = "";
-		this.imageUrl = "";
-	}
+    public Article() {
+    	this.id = -1;
+    	this.title = "";
+    	this.text = "";
+    	this.imageUrl = "";
+    }
 
-	// Setters and Getters...
+    // Setters and Getters...
 
-	public final boolean hasImage() {
-		return !TextUtils.isEmpty(this.imageUrl);
-	}
+    public final boolean hasImage() {
+    	return !TextUtils.isEmpty(this.imageUrl);
+    }
 
 }
 ````
@@ -178,7 +181,7 @@ class ArticleItem(itemModel : Article) : BaseItem<Article, ArticleItem.ViewHolde
         // (you can use the item view layout id if this item's view is not going
         // to be modified dynamically by adding new views to it, otherwise you will
         // have to compose your own id to properly distinguish the item's view within your adapter)
-        return MAIN_LAYOUT_ID
+        return R.layout.article_item_layout
     }
 
     override fun getTrackKey() : Int {
@@ -193,14 +196,6 @@ class ArticleItem(itemModel : Article) : BaseItem<Article, ArticleItem.ViewHolde
 
     }
 
-    companion object {
-
-        // provide a global unique base id for this item 
-        // (it will help you identify the item when assigning the listeners in the adapter)
-        @JvmStatic val MAIN_LAYOUT_ID : Int = R.layout.article_item_layout
-
-    }
-
 }
 ````
 
@@ -211,10 +206,6 @@ class ArticleItem(itemModel : Article) : BaseItem<Article, ArticleItem.ViewHolde
     
 ````java
 public final class ArticleItem extends BaseItem<Article, ArticleItem.ViewHolder, ItemResources> implements Trackable<Integer> {
-
-    // provide a global unique base id for this item 
-    // (it will help you identify the item when assigning the listeners in the adapter)
-    public static final int MAIN_LAYOUT_ID = R.layout.article_item_layout;
 
     public ArticleItem(Article itemModel) {
         super(itemModel);
@@ -245,7 +236,7 @@ public final class ArticleItem extends BaseItem<Article, ArticleItem.ViewHolder,
         // (you can use the item view layout id if this item's view is not going
         // to be modified dynamically by adding new views to it, otherwise you will
         // have to compose your own id to properly distinguish the item's view within your adapter)
-        return MAIN_LAYOUT_ID;
+        return R.layout.article_item_layout;
     }
 
     @Override
@@ -257,11 +248,11 @@ public final class ArticleItem extends BaseItem<Article, ArticleItem.ViewHolder,
 
     public static class ViewHolder extends BaseItem.ViewHolder<Article> {
 
-	    public ViewHolder(View itemView) {
-		    super(itemView);
+        public ViewHolder(View itemView) {
+	    super(itemView);
 
-		    // look up (or initialize) your views here...
-	    }
+            // look up (or initialize) your views here...
+        }
 
     }
 
@@ -278,8 +269,10 @@ public final class ArticleItem extends BaseItem<Article, ArticleItem.ViewHolder,
 <p>
     
 ````kotlin
-class ArticlesRecyclerViewAdapter(context : Context,
-                                  items : MutableList<ArticleItem>) : TrackableRecyclerViewAdapter<Long, ArticleItem, ArticleItem.ViewHolder>(context, items) {
+class ArticlesRecyclerViewAdapter(
+    context : Context,
+    items : MutableList<ArticleItem>
+) : TrackableRecyclerViewAdapter<Long, ArticleItem, ArticleItem.ViewHolder>(context, items) {
 
     var onArticleItemClickListener : OnItemClickListener<ArticleItem>? = null
 
@@ -397,8 +390,10 @@ Here's the implementation of the `ArticlesListViewAdapter`
 <p>
     
 ````kotlin
-class ArticlesListViewAdapter(context : Context,
-                              items : MutableList<ArticleItem>) : TrackableListViewAdapter<Long, ArticleItem, ArticleItem.ViewHolder>(context, items) {
+class ArticlesListViewAdapter(
+    context : Context,
+    items : MutableList<ArticleItem>
+) : TrackableListViewAdapter<Long, ArticleItem, ArticleItem.ViewHolder>(context, items) {
 
     var onItemClickListener : OnItemClickListener<ArticleItem>? = null
 
@@ -476,7 +471,7 @@ class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemR
                       inflater : LayoutInflater,
                       resources : ItemResources?) : ViewHolder {
         return ViewHolder(inflater.inflate(
-            MAIN_LAYOUT_ID,
+            layout,
             parent,
             false
         ))
@@ -499,19 +494,13 @@ class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemR
     }
 
     override fun getLayout() : Int {
-        return MAIN_LAYOUT_ID
+        return R.layout.topic_item_layout
     }
 
     class ViewHolder(itemView : View) : BaseItem.ViewHolder<Topic>(itemView) {
 
         val imageIv = itemView.findViewById<ImageView>(R.id.imageIv)
         val nameTv = itemView.findViewById<TextView>(R.id.nameTv)
-
-    }
-
-    companion object {
-
-        @JvmStatic val MAIN_LAYOUT_ID : Int = R.layout.topic_item_layout
 
     }
 
@@ -527,8 +516,6 @@ class TopicItem(itemModel : Topic) : BaseItem<Topic, TopicItem.ViewHolder, ItemR
 public final class TopicItem extends BaseItem<Topic, TopicItem.ViewHolder, ItemResources> implements
         Header<BaseItem.ViewHolder> {
 
-    public static final int MAIN_LAYOUT_ID = R.layout.topic_item_layout;
-
     public TopicItem(Topic itemModel) {
         super(itemModel);
     }
@@ -539,7 +526,7 @@ public final class TopicItem extends BaseItem<Topic, TopicItem.ViewHolder, ItemR
                            LayoutInflater inflater,
                            ItemResources resources) {
         return new ViewHolder(inflater.inflate(
-            MAIN_LAYOUT_ID,
+            getLayout(),
             parent,
             false
         ));
@@ -565,7 +552,7 @@ public final class TopicItem extends BaseItem<Topic, TopicItem.ViewHolder, ItemR
 
     @Override
     public int getLayout() {
-        return MAIN_LAYOUT_ID;
+        return R.layout.topic_item_layout;
     }
 
     public static final class ViewHolder extends BaseItem.ViewHolder<Topic> {
@@ -596,8 +583,10 @@ Here's an example of a multi-item adapter that supports Header and Footer items.
 <p>
     
 ````kotlin
-class SimpleRecyclerViewAdapter(context : Context,
-                                items : MutableList<BaseItem<*, *, *>>) : TrackableRecyclerViewAdapter<Long, BaseItem<*, *, *>, BaseItem.ViewHolder<*>>(context, items) {
+class SimpleRecyclerViewAdapter(
+	context : Context,
+	items : MutableList<BaseItem<*, *, *>>
+) : TrackableRecyclerViewAdapter<Long, BaseItem<*, *, *>, BaseItem.ViewHolder<*>>(context, items) {
 
     var onArticleItemClickListener : OnItemClickListener<ArticleItem>? = null
     var onTopicSuggestionItemClickListener : OnItemClickListener<TopicSuggestionItem>? = null
@@ -611,12 +600,12 @@ class SimpleRecyclerViewAdapter(context : Context,
     override fun assignListeners(holder : BaseItem.ViewHolder<*>, position : Int, item : BaseItem<*, *, *>) {
         super.assignListeners(holder, position, item)
 
-        when(item.getLayout()) {
-            ArticleItem.MAIN_LAYOUT_ID -> (item as ArticleItem).setOnItemClickListener((holder as ArticleItem.ViewHolder), onArticleItemClickListener)
-            FooterItem.MAIN_LAYOUT_ID -> (item as FooterItem).setOnButtonClickListener((holder as FooterItem.ViewHolder), onFooterButtonClickListener)
-            TopicSuggestionsItem.MAIN_LAYOUT_ID -> {
-                (item as TopicSuggestionsItem).setOnItemClickListener((holder as TopicSuggestionsItem.ViewHolder), onTopicSuggestionItemClickListener)
-                item.setOnItemLongClickListener(holder, onTopicSuggestionItemLongClickListener)
+        when(item) {
+            is ArticleItem -> onArticleItemClickListener?.let { item.setOnItemClickListener((holder as ArticleItem.ViewHolder), it) }
+            is FooterItem -> onFooterButtonClickListener?.let { item.setOnButtonClickListener((holder as FooterItem.ViewHolder), it) }
+            is TopicSuggestionsItem -> {
+                onTopicSuggestionItemClickListener?.let { item.setOnItemClickListener((holder as TopicSuggestionsItem.ViewHolder), it) }
+                onTopicSuggestionItemLongClickListener?.let { item.setOnItemLongClickListener((holder as TopicSuggestionsItem.ViewHolder), it) }
             }
         }
     }
@@ -645,20 +634,12 @@ public final class SimpleRecyclerViewAdapter extends TrackableRecyclerViewAdapte
     @Override
     public void assignListeners(BaseItem.ViewHolder holder, int position, BaseItem item) {
         super.assignListeners(holder, position, item);
-
-        switch(item.getLayout()) {
-
-            case ArticleItem.MAIN_LAYOUT_ID:
-                ((ArticleItem) item).setOnItemClickListener(((ArticleItem.ViewHolder) holder), onArticleItemClickListener);
-                break;
-
-            case FooterItem.MAIN_LAYOUT_ID:
-                ((FooterItem) item).setOnButtonClickListener(((FooterItem.ViewHolder) holder), onFooterButtonClickListener);
-                break;
-
-            //...
-
-        }
+		
+		if(item instanceof ArticleItem) {
+			((ArticleItem) item).setOnItemClickListener(((ArticleItem.ViewHolder) holder), onArticleItemClickListener);
+		} else if(item instanceof FooterItem) {
+			((FooterItem) item).setOnButtonClickListener(((FooterItem.ViewHolder) holder), onFooterButtonClickListener);
+		}
     }
 
     // Listener setters...
@@ -679,7 +660,7 @@ The sample ListView-based multi-item adapter implementation can be found here [`
 ````groovy
 ext {
     //...
-    adapsterLibraryVersion = "1.0.4"
+    adapsterLibraryVersion = "1.0.9"
 }
 
 dependencies {
