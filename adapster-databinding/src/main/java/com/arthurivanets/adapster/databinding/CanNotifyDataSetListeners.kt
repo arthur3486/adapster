@@ -26,42 +26,42 @@ interface CanNotifyDataSetListeners<IT, DS : List<IT>> {
      * Notifies all the registered adapter dataset change listeners
      * about the fact that the new item has been added to the underlying dataset.
      */
-    fun notifyDataSetItemAdded(item : IT)
+    fun onDataSetItemAdded(item : IT)
 
     /**
      * Notifies all the registered adapter dataset change listeners
      * about the fact that the specified item has been updated within the underlying dataset.
      */
-    fun notifyDataSetItemUpdated(item : IT)
+    fun onDataSetItemUpdated(item : IT)
 
     /**
      * Notifies all the registered adapter dataset change listeners
      * about the fact that the specified old item has been replaced with a new item within the underlying dataset.
      */
-    fun notifyDataSetItemReplaced(oldItem : IT, newItem : IT)
+    fun onDataSetItemReplaced(oldItem : IT, newItem : IT)
 
     /**
      * Notifies all the registered adapter dataset change listeners
      * about the fact that the specified item has been removed from the underlying dataset.
      */
-    fun notifyDataSetItemRemoved(item : IT)
+    fun onDataSetItemRemoved(item : IT)
 
     /**
      * Notifies all the registered adapter dataset change listeners
      * about the fact that the size of the underlying dataset has changed.
      */
-    fun notifyDataSetSizeChanged(oldSize : Int, newSize : Int)
+    fun onDataSetSizeChanged(oldSize : Int, newSize : Int)
 
     /**
      * Notifies all the registered adapter dataset change listeners
      * about the fact that the underlying dataset has been replaced with a new one.
      */
-    fun notifyDataSetReplaced(items : DS)
+    fun onDataSetReplaced(items : DS)
 
     /**
      * Notifies all the registered adapter dataset change listeners
      * about the fact that the underlying dataset has been cleared.
      */
-    fun notifyDataSetCleared(items : DS)
+    fun onDataSetCleared(items : DS)
 
 }

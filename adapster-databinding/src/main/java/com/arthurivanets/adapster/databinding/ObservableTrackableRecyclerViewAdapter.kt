@@ -72,42 +72,42 @@ abstract class ObservableTrackableRecyclerViewAdapter<KT : Any, IT : BaseItem<*,
     }
 
 
-    override fun notifyDataSetItemAdded(item : IT) {
+    override fun onDataSetItemAdded(item : IT) {
         trackIfNecessary(item)
         notifyItemAdded(item)
     }
 
 
-    override fun notifyDataSetItemUpdated(item : IT) {
+    override fun onDataSetItemUpdated(item : IT) {
         trackIfNecessary(item)
         notifyItemUpdated(item)
     }
 
 
-    override fun notifyDataSetItemReplaced(oldItem : IT, newItem : IT) {
+    override fun onDataSetItemReplaced(oldItem : IT, newItem : IT) {
         untrackIfNecessary(oldItem)
         trackIfNecessary(newItem)
         notifyItemReplaced(oldItem, newItem)
     }
 
 
-    override fun notifyDataSetItemRemoved(item : IT) {
+    override fun onDataSetItemRemoved(item : IT) {
         untrackIfNecessary(item)
         notifyItemDeleted(item)
     }
 
 
-    override fun notifyDataSetSizeChanged(oldSize : Int, newSize : Int) {
+    override fun onDataSetSizeChanged(oldSize : Int, newSize : Int) {
         notifyDatasetSizeChanged(oldSize, newSize)
     }
 
 
-    override fun notifyDataSetReplaced(items : MutableList<IT>) {
+    override fun onDataSetReplaced(items : MutableList<IT>) {
         throw UnsupportedOperationException("Dataset replacement is not supported in Observable Adapters.")
     }
 
 
-    override fun notifyDataSetCleared(items : MutableList<IT>) {
+    override fun onDataSetCleared(items : MutableList<IT>) {
         clear()
     }
 

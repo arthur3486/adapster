@@ -16,6 +16,7 @@
 
 package com.arthurivanets.adapster.databinding
 
+import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import com.arthurivanets.adapster.databinding.utils.forEachInRange
 import com.arthurivanets.adapster.databinding.utils.ifCanNotifyDataSetListeners
@@ -42,47 +43,116 @@ open class ObservableTrackableRecyclerViewAdapterDataSetChangeHandler<KT, IT : B
 
 
     override fun onChanged(sender : ObservableList<IT>?) {
-        adapter?.ifCanNotifyDataSetListeners { sender?.let(::notifyDataSetReplaced) }
+        onChangedInternal(sender ?: ObservableArrayList())
+    }
+
+
+    private fun onChangedInternal(sender : MutableList<IT>) {
         adapter?.notifyDataSetChanged()
+        adapter?.ifCanNotifyDataSetListeners { sender.let(::onDataSetReplaced) }
     }
 
 
-    override fun onItemRangeInserted(sender : ObservableList<IT>?, positionStart : Int, itemCount : Int) {
-        adapter?.ifCanNotifyDataSetListeners {
-            sender?.forEachInRange(
-                startIndex = positionStart,
-                endIndex = (positionStart + itemCount - 1),
-                action = ::notifyDataSetItemAdded
-            )
-        }
+    override fun onItemRangeInserted(sender : ObservableList<IT>?,
+                                     positionStart : Int,
+                                     itemCount : Int) {
+        onItemRangeInsertedInternal(
+            sender = (sender ?: emptyList()),
+            positionStart = positionStart,
+            itemCount = itemCount
+        )
+    }
+
+
+    private fun onItemRangeInsertedInternal(sender : List<IT>,
+                                            positionStart : Int,
+                                            itemCount : Int) {
         adapter?.notifyItemRangeInserted(positionStart, itemCount)
-    }
-
-
-    override fun onItemRangeRemoved(sender : ObservableList<IT>?, positionStart : Int, itemCount : Int) {
         adapter?.ifCanNotifyDataSetListeners {
-            val dataSetItemCount = (sender?.size ?: 0)
-            notifyDataSetSizeChanged((dataSetItemCount + itemCount), dataSetItemCount)
+            sender.forEachInRange(
+                startIndex = positionStart,
+                endIndex = (positionStart + itemCount - 1),
+                action = ::onDataSetItemAdded
+            )
         }
+        reportDataSetSizeChanged(
+            oldSize = (sender.size - itemCount),
+            newSize = sender.size
+        )
+    }
+
+
+    override fun onItemRangeRemoved(sender : ObservableList<IT>?,
+                                    positionStart : Int,
+                                    itemCount : Int) {
+        onItemRangeRemovedInternal(
+            sender = (sender ?: emptyList()),
+            positionStart = positionStart,
+            itemCount = itemCount
+        )
+    }
+
+
+    private fun onItemRangeRemovedInternal(sender : List<IT>,
+                                           positionStart : Int,
+                                           itemCount : Int) {
         adapter?.notifyItemRangeRemoved(positionStart, itemCount)
+        reportDataSetSizeChanged(
+            oldSize = (sender.size + itemCount),
+            newSize = sender.size
+        )
     }
 
 
-    override fun onItemRangeMoved(sender : ObservableList<IT>?, fromPosition : Int, toPosition : Int, itemCount : Int) {
-        onItemRangeRemoved(sender, fromPosition, itemCount)
-        onItemRangeInserted(sender, toPosition, itemCount)
+    override fun onItemRangeMoved(sender : ObservableList<IT>?,
+                                  fromPosition : Int,
+                                  toPosition : Int,
+                                  itemCount : Int) {
+        onItemRangeRemovedInternal(
+            sender = (sender ?: emptyList()),
+            positionStart = fromPosition,
+            itemCount = itemCount
+        )
+        onItemRangeInsertedInternal(
+            sender = (sender ?: emptyList()),
+            positionStart = toPosition,
+            itemCount = itemCount
+        )
     }
 
 
-    override fun onItemRangeChanged(sender : ObservableList<IT>?, positionStart : Int, itemCount : Int) {
+    override fun onItemRangeChanged(sender : ObservableList<IT>?,
+                                    positionStart : Int,
+                                    itemCount : Int) {
+        onItemRangeChangedInternal(
+            sender = sender,
+            positionStart = positionStart,
+            itemCount = itemCount
+        )
+    }
+
+
+    private fun onItemRangeChangedInternal(sender : ObservableList<IT>?,
+                                           positionStart : Int,
+                                           itemCount : Int) {
+        adapter?.notifyItemRangeChanged(positionStart, itemCount)
         adapter?.ifCanNotifyDataSetListeners {
             sender?.forEachInRange(
                 startIndex = positionStart,
                 endIndex = (positionStart + itemCount - 1),
-                action = ::notifyDataSetItemUpdated
+                action = ::onDataSetItemUpdated
             )
         }
-        adapter?.notifyItemRangeChanged(positionStart, itemCount)
+    }
+
+
+    private fun reportDataSetSizeChanged(oldSize : Int, newSize : Int) {
+        adapter?.ifCanNotifyDataSetListeners {
+            onDataSetSizeChanged(
+                oldSize = oldSize,
+                newSize = newSize
+            )
+        }
     }
 
 
