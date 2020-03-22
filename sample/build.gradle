@@ -36,14 +36,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:${rootProject.supportLibraryVersion}"
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintLayoutVersion}"
     implementation "androidx.recyclerview:recyclerview:${rootProject.recyclerViewVersion}"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "com.squareup.picasso:picasso:2.5.2"
     implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0"
-    implementation "androidx.core:core-ktx:1.0.1"
+    implementation "androidx.core:core-ktx:1.2.0"
     testImplementation "junit:junit:${rootProject.jUnitVersion}"
     testImplementation "org.robolectric:robolectric:${rootProject.robolectricVersion}"
     androidTestImplementation "androidx.test:runner:${rootProject.testRunnerVersion}"
